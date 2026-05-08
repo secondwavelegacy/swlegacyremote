@@ -767,6 +767,16 @@ initializeApp(firebaseConfig);
 const db =
 getDatabase(app);
 
+  // Debug untuk lihat data realtime
+const dbRef = ref(db, 'account');
+onValue(dbRef, (snapshot) => {
+  const data = snapshot.val();
+  console.log("Realtime Firebase data:", data); // akan muncul di console
+  if(data && data.balance !== undefined){
+    document.getElementById("balanceAmount").textContent = "$" + data.balance;
+  }
+});
+
 // ELEMENTS
 const balanceEl =
 document.getElementById("balanceAmount");
