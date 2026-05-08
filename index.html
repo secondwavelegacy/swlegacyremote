@@ -393,18 +393,32 @@
 
         <div class="chart">
 
-  <iframe
-    src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_chart&symbol=OANDA:XAUUSD&interval=15&hidesidetoolbar=1&symboledit=1&saveimage=0&toolbarbg=0f0f0f&theme=dark&style=1&timezone=Asia/Kuala_Lumpur&studies=[]&hideideas=1"
-    width="100%"
-    height="100%"
-    frameborder="0"
-    allowtransparency="true"
-    scrolling="no">
-  </iframe>
+  <div class="tradingview-widget-container">
+    <div id="tradingview_chart" style="height:100%; width:100%;"></div>
+
+    <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+
+    <script type="text/javascript">
+      new TradingView.widget({
+        "width": "100%",
+        "height": "100%",
+        "symbol": "OANDA:XAUUSD",
+        "interval": "15",
+        "timezone": "Asia/Kuala_Lumpur",
+        "theme": "dark",
+        "style": "1",
+        "locale": "en",
+        "toolbar_bg": "#0f0f0f",
+        "enable_publishing": false,
+        "hide_top_toolbar": false,
+        "hide_side_toolbar": false,
+        "allow_symbol_change": true,
+        "container_id": "tradingview_chart"
+      });
+    </script>
+  </div>
 
 </div>
-
-      </div>
 
       <div class="card" style="margin-top:20px;">
 
