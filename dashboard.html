@@ -834,21 +834,34 @@ window.toggleBalance = function(){
 };
 
 // REALTIME BALANCE
-const balanceRef = ref(db, "account/balance");
+const balanceRef =
+ref(db, "account/balance");
 
-onValue(balanceRef, (snapshot) => {
-  const val = snapshot.val();
-  console.log("Realtime balance dari Firebase raw:", val); // Debug awal
+onValue(balanceRef, (snapshot)=>{
 
-  // Pastikan val adalah number
-  const balanceNumber = Number(val);
-  if(!isNaN(balanceNumber)){
-    currentBalance = balanceNumber;
-    updateBalanceUI();
-  } else {
-    console.warn("Balance bukan angka valid:", val);
+  const val =
+  snapshot.val();
+
+  if(val !== null){
+
+    currentBalance = val;
+
   }
+
+  updateBalanceUI();
+
 });
+
+  // TEST LANGSUNG
+get(ref(db, "account/balance"))
+  .then((snapshot) => {
+    if (snapshot.exists()) {
+      console.log("Test balance langsung:", snapshot.val());
+    } else {
+      console.log("Node balance tidak ada");
+    }
+  })
+  .catch((err) => console.error("Error baca balance:", err));
 
 
 // REALTIME MT5 STATUS
