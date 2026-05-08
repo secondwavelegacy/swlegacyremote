@@ -763,27 +763,34 @@ function openFullscreenChart(){
 
 }
 
-let balanceHidden =
-localStorage.getItem("balanceHidden") === "true";
+let currentBalance = 0;
 
-const balance =
-document.getElementById("balanceAmount");
+const balanceRef =
+ref(db, "account/balance");
 
-const eye =
-document.getElementById("eyeIcon");
+onValue(balanceRef, (snapshot)=>{
+
+  currentBalance =
+  snapshot.val();
+
+  updateBalanceUI();
+
+});
 
 function updateBalanceUI(){
 
   if(balanceHidden){
 
-    balance.textContent = "••••••";
+    balance.textContent =
+    "••••••";
 
     eye.innerHTML =
     '<i class="fa-solid fa-eye-slash"></i>';
 
   }else{
 
-    balance.textContent = "$1,339.5";
+    balance.textContent =
+    "$" + currentBalance;
 
     eye.innerHTML =
     '<i class="fa-solid fa-eye"></i>';
@@ -794,7 +801,8 @@ function updateBalanceUI(){
 
 function toggleBalance(){
 
-  balanceHidden = !balanceHidden;
+  balanceHidden =
+  !balanceHidden;
 
   localStorage.setItem(
     "balanceHidden",
