@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TradingView Screenshot</title>
+  <title>TradingView Auto Screenshot</title>
+
   <style>
     body{
-      font-family: Arial;
+      margin:0;
       background:#111;
       color:white;
+      font-family:Arial;
       text-align:center;
-      padding-top:100px;
     }
 
-    button{
-      padding:15px 30px;
-      font-size:18px;
+    h1{
+      padding:20px;
+    }
+
+    iframe{
+      width:100%;
+      height:90vh;
       border:none;
-      border-radius:10px;
-      cursor:pointer;
     }
   </style>
 </head>
 
 <body>
 
-<h1>TradingView Auto Screenshot</h1>
+<h1>TradingView Live Chart</h1>
 
-<button onclick="alert('Website jalan!')">
-Test Button
-</button>
+<iframe
+src="https://www.tradingview.com/chart/"
+allowfullscreen>
+</iframe>
 
 </body>
 </html>
