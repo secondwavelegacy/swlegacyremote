@@ -14,6 +14,10 @@ if(localStorage.getItem("loggedIn") !== "true"){
 </script>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
 
@@ -346,16 +350,17 @@ gap:15px;
           $12,540
         </span>
 
-        <span
-          onclick="toggleBalance()"
-          id="eyeIcon"
-          style="
-            cursor:pointer;
-            margin-left:8px;
-            user-select:none;
-          "
-        >
-          👁️
+       <span
+  onclick="toggleBalance()"
+  id="eyeIcon"
+  style="
+    cursor:pointer;
+    margin-left:8px;
+    user-select:none;
+  "
+>
+  <i class="fa-solid fa-eye"></i>
+</span>
         </span>
 
       </div>
@@ -700,14 +705,14 @@ function toggleBalance(){
   if(balanceHidden){
 
     balance.textContent = "$12,540";
-    eye.textContent = "👁️";
+   eye.innerHTML = '<i class="fa-solid fa-eye"></i>';
 
     balanceHidden = false;
 
   }else{
 
     balance.textContent = "••••••";
-    eye.textContent = "👁️‍🗨️";
+    eye.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
 
     balanceHidden = true;
 
