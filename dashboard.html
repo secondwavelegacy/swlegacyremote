@@ -1,9 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
 <title>SW Legacy Manager</title>
 
 <script>
@@ -13,9 +14,12 @@ if(localStorage.getItem("loggedIn") !== "true"){
 </script>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 <style>
+
 *{
   margin:0;
   padding:0;
@@ -95,7 +99,11 @@ body::after{
 }
 
 .menu-link.active{
-  background:linear-gradient(135deg,#ffcc00,#ff9800);
+  background:linear-gradient(
+    135deg,
+    #ffcc00,
+    #ff9800
+  );
   color:black;
   font-weight:600;
 }
@@ -152,29 +160,63 @@ body::after{
   padding:22px;
   box-shadow:0 10px 40px rgba(0,0,0,0.3);
 }
-  <!-- LEFT -->
-<div>
-  <div class="card">
-
-    <div class="profile">
-      <div class="avatar" id="avatarText">ES</div>
-      <div>
-        <h2 id="clientName">Encik Shuq</h2>
-        <p class="small">Realtime MT5 Control</p>
-      </div>
-    </div>
-
-    <div class="stats">
-      <!-- Mini cards seperti Winrate & Trades -->
-    </div>
-
-  </div>
-</div>
 
 .title{
   font-size:18px;
   margin-bottom:18px;
   font-weight:600;
+}
+
+.live-title{
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.live-title:hover{
+  color:#ffb300;
+  transform:translateX(4px);
+}
+
+.profile{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  margin-bottom:25px;
+}
+
+.avatar{
+  width:65px;
+  height:65px;
+  border-radius:20px;
+  background:linear-gradient(135deg,#ffb300,#ff6b00);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:black;
+  font-weight:700;
+  font-size:22px;
+}
+
+.small{
+  color:rgba(255,255,255,0.45);
+  font-size:13px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.mini-card{
+  background:rgba(0,0,0,0.25);
+  border-radius:18px;
+  padding:18px;
+}
+
+.mini-card h2{
+  margin-top:8px;
+  font-size:24px;
 }
 
 .chart{
@@ -190,7 +232,81 @@ body::after{
   height:100%;
 }
 
+.trade{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 14px;
+  border-radius:20px;
+  background:rgba(0,0,0,0.25);
+  margin-bottom:10px;
+  border:1px solid rgba(255,255,255,0.05);
+}
+
+.trade-left{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.type{
+  width:40px;
+  height:40px;
+  font-size:12px;
+  border-radius:18px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight:700;
+}
+
+.buy{
+  background:rgba(0,255,140,0.12);
+  color:#42ff8c;
+}
+
+.sell{
+  background:rgba(255,80,80,0.12);
+  color:#ff6767;
+}
+
+.profit{
+  color:#42ff8c;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.close-btn{
+  border:none;
+  padding:12px 18px;
+  border-radius:14px;
+  background:rgba(255,80,80,0.15);
+  color:#ff7a7a;
+  cursor:pointer;
+}
+
+.feed{
+  padding:15px;
+  border-radius:18px;
+  background:rgba(0,0,0,0.25);
+  margin-bottom:12px;
+  color:rgba(255,255,255,0.75);
+  font-size:14px;
+}
+
+.footer-box{
+  background:linear-gradient(135deg,#ffcc00,#ff8f00);
+  color:black;
+}
+
+.footer-box p{
+  margin-top:10px;
+  color:rgba(0,0,0,0.7);
+  line-height:1.6;
+}
+
 @media(max-width:1100px){
+
   .dashboard{
     grid-template-columns:1fr;
   }
@@ -198,138 +314,412 @@ body::after{
   .chart{
     height:400px;
   }
+
 }
+
 </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-<div class="topbar">
+  <div class="topbar">
 
-<div class="logo" style="display:flex;align-items:center;gap:15px;">
+    <div class="logo" style="
+      display:flex;
+      align-items:center;
+      gap:15px;
+    ">
 
-<img
-src="logo.png"
-style="width:100px;height:100px;border-radius:16px;object-fit:cover;"
->
+      <img
+        src="logo.png"
+        style="
+          width:100px;
+          height:100px;
+          border-radius:16px;
+          object-fit:cover;
+        "
+      >
 
-<div>
-<h1>SW LEGACY MANAGER</h1>
-<p>The Best EA Control Panel</p>
-</div>
+      <div>
+        <h1>SW LEGACY MANAGER</h1>
+        <p>The Best EA Control Panel</p>
+      </div>
 
-</div>
+    </div>
 
-<div class="menu">
-<a href="dashboard.html" class="menu-link active">Dashboard</a>
-<a href="control.html" class="menu-link">Trade Control</a>
-<a href="analytics.html" class="menu-link">Analytics</a>
-<a href="settings.html" class="menu-link">Settings</a>
-</div>
+    <div class="menu">
 
-<div class="status">
+      <a href="dashboard.html" class="menu-link active">
+        Dashboard
+      </a>
 
-<div class="status-box disconnected" id="mt5Status">
-● MT5 DISCONNECTED
-</div>
+      <a href="control.html" class="menu-link">
+        Trade Control
+      </a>
 
-<div class="status-box">
-Balance :
-<span id="balanceAmount">$0</span>
+      <a href="analytics.html" class="menu-link">
+        Analytics
+      </a>
 
-<span
-onclick="toggleBalance()"
-id="eyeIcon"
-style="cursor:pointer;margin-left:8px;user-select:none;"
->
-<i class="fa-solid fa-eye"></i>
-</span>
+      <a href="settings.html" class="menu-link">
+        Settings
+      </a>
 
-</div>
+    </div>
 
-</div>
+    <div class="status">
 
-</div>
+      <div
+        class="status-box connected"
+        id="mt5Status"
+      >
+        ● MT5 CONNECTED
+      </div>
 
-<div class="dashboard">
+      <div class="status-box">
 
-<div>
-<div class="card">
-<h2>Account Overview</h2>
-<p style="margin-top:15px;color:rgba(255,255,255,0.6);">
-Realtime MT5 control panel connected with Firebase.
-</p>
-</div>
-</div>
+        Balance :
+        <span id="balanceAmount">$0</span>
 
-<div>
+        <span
+          onclick="toggleBalance()"
+          id="eyeIcon"
+          style="
+            cursor:pointer;
+            margin-left:8px;
+            user-select:none;
+          "
+        >
+          <i class="fa-solid fa-eye"></i>
+        </span>
 
-<div class="card" style="margin-bottom:20px;">
-<div class="title">Account Analytics</div>
+      </div>
 
-<div style="margin-bottom:20px;">
-<div style="display:flex;justify-content:space-between;margin-bottom:8px;">
-<span>Equity</span>
-<span id="equityAmount">$0</span>
-</div>
+    </div>
 
-<div style="height:10px;background:#111;border-radius:20px;overflow:hidden;">
-<div id="equityBar" style="width:0%;height:100%;background:linear-gradient(90deg,#ffcc00,#ff9800);"></div>
-</div>
-</div>
-</div>
+  </div>
 
-<div class="card">
-<div class="title">Live Market View</div>
-<div class="chart">
-<div id="tradingview_chart"></div>
-</div>
-</div>
+  <div class="dashboard">
 
-</div>
+    <!-- LEFT -->
+    <div>
 
-<div>
-<div class="card">
-<h2>Signal Feed</h2>
-<p style="margin-top:15px;color:rgba(255,255,255,0.6);">
-BUY XAUUSD confirmed
-</p>
-</div>
-</div>
+      <div class="card">
 
-</div>
+        <div class="profile">
+
+          <div
+            class="avatar"
+            id="avatarText"
+          >
+            ES
+          </div>
+
+          <div>
+
+            <h2 id="clientName">
+              Encik Shuq
+            </h2>
+
+            <p class="small">
+              Realtime MT5 Control
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="stats">
+
+          <div class="mini-card">
+            <p class="small">Winrate</p>
+            <h2>87%</h2>
+          </div>
+
+          <div class="mini-card">
+            <p class="small">Trades</p>
+            <h2>124</h2>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- CENTER -->
+    <div>
+
+      <!-- ACCOUNT ANALYTICS -->
+      <div class="card" style="margin-bottom:20px;">
+
+        <div class="title">
+          Account Analytics
+        </div>
+
+        <div style="margin-bottom:20px;">
+
+          <div style="
+            display:flex;
+            justify-content:space-between;
+            margin-bottom:8px;
+          ">
+            <span class="small">Equity</span>
+            <span>$1,540</span>
+          </div>
+
+          <div style="
+            height:10px;
+            background:#111;
+            border-radius:20px;
+            overflow:hidden;
+          ">
+            <div style="
+              width:82%;
+              height:100%;
+              background:linear-gradient(
+                90deg,
+                #ffcc00,
+                #ff9800
+              );
+            "></div>
+          </div>
+
+        </div>
+
+        <div>
+
+          <div style="
+            display:flex;
+            justify-content:space-between;
+            margin-bottom:8px;
+          ">
+            <span class="small">Daily Target</span>
+            <span>68%</span>
+          </div>
+
+          <div style="
+            height:10px;
+            background:#111;
+            border-radius:20px;
+            overflow:hidden;
+          ">
+            <div style="
+              width:68%;
+              height:100%;
+              background:linear-gradient(
+                90deg,
+                #00ff99,
+                #00cc66
+              );
+            "></div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- LIVE MARKET -->
+      <div class="card">
+
+        <div
+          class="title live-title"
+          onclick="openFullscreenChart()"
+        >
+          Live Market View ⛶
+        </div>
+
+        <div class="chart">
+          <div id="tradingview_chart"></div>
+        </div>
+
+      </div>
+
+      <!-- ACTIVE POSITIONS -->
+      <div class="card" style="margin-top:20px;">
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          margin-bottom:20px;
+        ">
+
+          <div class="title" style="margin:0;">
+            Active Positions
+          </div>
+
+          <div class="profit">
+            Floating +$200.50
+          </div>
+
+        </div>
+
+        <div class="trade">
+
+          <div class="trade-left">
+
+            <div class="type buy">
+              BUY
+            </div>
+
+            <div>
+              <h3>XAUUSD</h3>
+              <p class="small">
+                Lot 0.05 • RR 1:2.5
+              </p>
+            </div>
+
+          </div>
+
+          <div>
+
+            <div class="profit">
+              +128.40
+            </div>
+
+            <button class="close-btn">
+              Close
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="trade">
+
+          <div class="trade-left">
+
+            <div class="type sell">
+              SELL
+            </div>
+
+            <div>
+              <h3>US30</h3>
+              <p class="small">
+                Lot 0.10 • RR 1:1.8
+              </p>
+            </div>
+
+          </div>
+
+          <div>
+
+            <div class="profit">
+              +72.10
+            </div>
+
+            <button class="close-btn">
+              Close
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div>
+
+      <div class="card">
+
+        <div class="title">
+          Signal Feed
+        </div>
+
+        <div class="feed">
+          BUY XAUUSD confirmed
+        </div>
+
+        <div class="feed">
+          SL moved to breakeven
+        </div>
+
+        <div class="feed">
+          TP1 reached GBPJPY
+        </div>
+
+        <div class="feed">
+          Liquidity sweep detected
+        </div>
+
+      </div>
+
+      <div class="card footer-box" style="margin-top:20px;">
+
+        <h2>SW LEGACY MANAGER</h2>
+
+        <p>
+          Premium institutional-grade remote trading control system for MetaTrader 5.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
 
 </div>
 
 <script src="https://s3.tradingview.com/tv.js"></script>
 
 <script>
+
 function loadTradingView(){
 
-if(typeof TradingView === "undefined"){
-return;
+  if(typeof TradingView === "undefined"){
+    return;
+  }
+
+  new TradingView.widget({
+
+    container_id: "tradingview_chart",
+    autosize: true,
+    symbol: "OANDA:XAUUSD",
+    interval: "15",
+    timezone: "Asia/Kuala_Lumpur",
+    theme: "dark",
+    style: "1",
+    locale: "en",
+    toolbar_bg: "#0f0f0f",
+    enable_publishing: false,
+    allow_symbol_change: true,
+    hide_top_toolbar: false,
+    hide_side_toolbar: false
+
+  });
+
 }
 
-new TradingView.widget({
-container_id:"tradingview_chart",
-autosize:true,
-symbol:"OANDA:XAUUSD",
-interval:"15",
-timezone:"Asia/Kuala_Lumpur",
-theme:"dark",
-style:"1",
-locale:"en",
-toolbar_bg:"#0f0f0f",
-enable_publishing:false,
-allow_symbol_change:true
-});
-}
+window.onload = function(){
 
-window.onload=function(){
-setTimeout(loadTradingView,500);
+  setTimeout(loadTradingView, 500);
+
 };
+
+function openFullscreenChart(){
+
+  const chart =
+  document.querySelector('.chart');
+
+  if(chart.requestFullscreen){
+    chart.requestFullscreen();
+  }
+  else if(chart.webkitRequestFullscreen){
+    chart.webkitRequestFullscreen();
+  }
+  else if(chart.msRequestFullscreen){
+    chart.msRequestFullscreen();
+  }
+
+}
+
 </script>
 
 <script type="module">
@@ -338,121 +728,182 @@ import { initializeApp }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 import {
-getDatabase,
-ref,
-onValue
+  getDatabase,
+  ref,
+  onValue
 }
 from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
-const firebaseConfig={
-apiKey:"AIzaSyCqxsYWRuwfS2lsc2v6qmzB_LFR3HGx3H8",
-authDomain:"sw-legacy-manager.firebaseapp.com",
-databaseURL:"https://sw-legacy-manager-default-rtdb.asia-southeast1.firebasedatabase.app",
-projectId:"sw-legacy-manager",
-storageBucket:"sw-legacy-manager.firebasestorage.app",
-messagingSenderId:"267816826332",
-appId:"1:267816826332:web:7499b47bdb5a0679024b19"
+// FIREBASE CONFIG
+const firebaseConfig = {
+
+  apiKey:
+  "AIzaSyCqxsYWRuwfS2lsc2v6qmzB_LFR3HGx3H8",
+
+  authDomain:
+  "sw-legacy-manager.firebaseapp.com",
+
+  databaseURL:
+  "https://sw-legacy-manager-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+  projectId:
+  "sw-legacy-manager",
+
+  storageBucket:
+  "sw-legacy-manager.firebasestorage.app",
+
+  messagingSenderId:
+  "267816826332",
+
+  appId:
+  "1:267816826332:web:7499b47bdb5a0679024b19"
+
 };
 
-const app=initializeApp(firebaseConfig);
-const db=getDatabase(app);
+// INIT FIREBASE
+const app =
+initializeApp(firebaseConfig);
 
-const balanceEl=document.getElementById("balanceAmount");
-const eyeEl=document.getElementById("eyeIcon");
-const mt5StatusEl=document.getElementById("mt5Status");
-  
-// Elements
-const avatarEl = document.getElementById("avatarText");
-const clientNameEl = document.getElementById("clientName");
+const db =
+getDatabase(app);
 
-// Firebase reference for name
-const nameRef = ref(db, "account/name");
+// ELEMENTS
+const balanceEl =
+document.getElementById("balanceAmount");
 
-// Listen for name changes
-onValue(nameRef, (snapshot) => {
-  const name = snapshot.val();
-  if (name) {
-    clientNameEl.textContent = name;
+const eyeEl =
+document.getElementById("eyeIcon");
 
-    // Update avatar initials
-    avatarEl.textContent = name
-      .split(" ")
-      .map(n => n[0])
-      .join("")
-      .toUpperCase();
-  }
-});
-  
-const equityAmount=document.getElementById("equityAmount");
-const equityBar=document.getElementById("equityBar");
+const mt5StatusEl =
+document.getElementById("mt5Status");
 
-let balanceHidden=localStorage.getItem("balanceHidden") === "true";
-let currentBalance=0;
+const avatarEl =
+document.getElementById("avatarText");
 
+const clientNameEl =
+document.getElementById("clientName");
+
+// STATE
+let balanceHidden =
+localStorage.getItem("balanceHidden") === "true";
+
+let currentBalance = 0;
+
+// UPDATE BALANCE UI
 function updateBalanceUI(){
 
-if(balanceHidden){
+  if(balanceHidden){
 
-balanceEl.textContent="••••••";
+    balanceEl.textContent =
+    "••••••";
 
-eyeEl.innerHTML='<i class="fa-solid fa-eye-slash"></i>';
+    eyeEl.innerHTML =
+    '<i class="fa-solid fa-eye-slash"></i>';
 
-}else{
+  }else{
 
-balanceEl.textContent="$" + currentBalance;
+    balanceEl.textContent =
+    "$" + currentBalance;
 
-eyeEl.innerHTML='<i class="fa-solid fa-eye"></i>';
+    eyeEl.innerHTML =
+    '<i class="fa-solid fa-eye"></i>';
+
+  }
 
 }
-}
 
-window.toggleBalance=function(){
-balanceHidden=!balanceHidden;
-localStorage.setItem("balanceHidden",balanceHidden);
-updateBalanceUI();
-}
+// TOGGLE BALANCE
+window.toggleBalance = function(){
 
-const balanceRef=ref(db,"account/balance");
+  balanceHidden =
+  !balanceHidden;
 
-onValue(balanceRef,(snapshot)=>{
-const val=snapshot.val();
+  localStorage.setItem(
+    "balanceHidden",
+    balanceHidden
+  );
 
-if(val !== null){
-currentBalance=val;
-updateBalanceUI();
+  updateBalanceUI();
 
-equityAmount.textContent="$" + val;
+};
 
-const percent=Math.min((val / 20000) * 100,100);
-equityBar.style.width=percent + "%";
-}
+// REALTIME BALANCE
+const balanceRef =
+ref(db, "account/balance");
+
+onValue(balanceRef, (snapshot)=>{
+
+  const val =
+  snapshot.val();
+
+  if(val !== null){
+
+    currentBalance = val;
+
+  }
+
+  updateBalanceUI();
+
 });
 
-const statusRef=ref(db,"account/status");
+// REALTIME MT5 STATUS
+const statusRef =
+ref(db, "account/status");
 
-onValue(statusRef,(snapshot)=>{
-const status=snapshot.val();
+onValue(statusRef, (snapshot)=>{
 
-if(status === "CONNECTED"){
+  const status =
+  snapshot.val();
 
-mt5StatusEl.innerHTML="● MT5 CONNECTED";
-mt5StatusEl.classList.add("connected");
-mt5StatusEl.classList.remove("disconnected");
+  if(status === "CONNECTED"){
 
-}else{
+    mt5StatusEl.innerHTML =
+    "● MT5 CONNECTED";
 
-mt5StatusEl.innerHTML="● MT5 DISCONNECTED";
-mt5StatusEl.classList.add("disconnected");
-mt5StatusEl.classList.remove("connected");
+    mt5StatusEl.className =
+    "status-box connected";
 
-}
+  }else{
+
+    mt5StatusEl.innerHTML =
+    "● MT5 DISCONNECTED";
+
+    mt5StatusEl.className =
+    "status-box disconnected";
+
+  }
+
 });
 
+// REALTIME CLIENT NAME
+const nameRef =
+ref(db, "account/name");
+
+onValue(nameRef, (snapshot)=>{
+
+  const name =
+  snapshot.val();
+
+  if(name){
+
+    clientNameEl.textContent =
+    name;
+
+    avatarEl.textContent =
+    name
+    .split(" ")
+    .map(n => n[0])
+    .join("")
+    .toUpperCase();
+
+  }
+
+});
+
+// INIT UI
 updateBalanceUI();
 
 </script>
 
 </body>
 </html>
-}
-```
