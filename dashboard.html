@@ -695,7 +695,7 @@ gap:15px;
 
 function loadTradingView(){
 
-  if(typeof TradingView === 'undefined'){
+  if(typeof TradingView === "undefined"){
     return;
   }
 
@@ -717,7 +717,7 @@ function loadTradingView(){
 
     locale: "en",
 
-    toolbar_bg: "#0f0f0f",
+    toolbar_bg": "#0f0f0f",
 
     enable_publishing: false,
 
@@ -733,11 +733,26 @@ function loadTradingView(){
 
 window.onload = function(){
 
-  setTimeout(loadTradingView, 1000);
+  setTimeout(loadTradingView, 500);
+
+  updateBalanceUI();
 
 };
 
-</script>
+function openFullscreenChart(){
+
+  const chart =
+    document.querySelector('.chart');
+
+  if(chart.requestFullscreen){
+    chart.requestFullscreen();
+  }
+  else if(chart.webkitRequestFullscreen){
+    chart.webkitRequestFullscreen();
+  }
+  else if(chart.msRequestFullscreen){
+    chart.msRequestFullscreen();
+  }
 
 }
 
@@ -745,10 +760,10 @@ let balanceHidden =
 localStorage.getItem("balanceHidden") === "true";
 
 const balance =
-document.getElementById('balanceAmount');
+document.getElementById("balanceAmount");
 
 const eye =
-document.getElementById('eyeIcon');
+document.getElementById("eyeIcon");
 
 function updateBalanceUI(){
 
@@ -782,8 +797,6 @@ function toggleBalance(){
   updateBalanceUI();
 
 }
-
-updateBalanceUI();
 
 </script>
 
