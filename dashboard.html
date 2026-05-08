@@ -641,6 +641,37 @@ function openFullscreenChart() {
   }
 
 }
+   <script>
+
+let balanceHidden = false;
+
+function toggleBalance(){
+
+  const balance =
+    document.getElementById('balanceAmount');
+
+  const eye =
+    document.getElementById('eyeIcon');
+
+  if(balanceHidden){
+
+    balance.innerHTML = "$12,540";
+    eye.innerHTML = "👁️";
+
+    balanceHidden = false;
+
+  }else{
+
+    balance.innerHTML = "••••••";
+    eye.innerHTML = "🙈";
+
+    balanceHidden = true;
+
+  }
+
+}
+
+</script> 
 
 </script>
 
