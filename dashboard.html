@@ -852,16 +852,16 @@ onValue(balanceRef, (snapshot)=>{
 
 });
 
-  // TEST LANGSUNG
-import { get } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
-get(ref(db, "account/balance")).then((snapshot)=>{
-  if(snapshot.exists()){
-    console.log("Test balance langsung:", snapshot.val());
-  }else{
-    console.log("Node balance tidak ada");
+  // REALTIME BALANCE
+const balanceRef = ref(db, "account/balance");
+
+onValue(balanceRef, (snapshot) => {
+  const val = snapshot.val();
+  console.log("Realtime balance dari Firebase:", val); // Debug
+  if(val !== null){
+    currentBalance = val;
+    updateBalanceUI();
   }
-}).catch((err)=>{
-  console.error("Error baca balance:", err);
 });
 
 // REALTIME MT5 STATUS
