@@ -435,9 +435,9 @@ body::after{
         <div class="stats">
 
           <div class="mini-card">
-            <p class="small">Winrate</p>
-            <h2>87%</h2>
-          </div>
+  <p class="small">Winrate</p>
+  <h2 id="winrateValue">87%</h2>
+</div>
 
           <div class="mini-card">
             <p class="small">Trades</p>
@@ -783,6 +783,9 @@ document.getElementById("avatarText");
 const clientNameEl =
 document.getElementById("clientName");
 
+const winrateEl =
+document.getElementById("winrateValue");
+
 // STATE
 let balanceHidden =
 localStorage.getItem("balanceHidden") === "true";
@@ -895,6 +898,24 @@ onValue(nameRef, (snapshot)=>{
     .map(n => n[0])
     .join("")
     .toUpperCase();
+
+  }
+
+});
+
+  // REALTIME WINRATE
+const winrateRef =
+ref(db, "account/winrate");
+
+onValue(winrateRef, (snapshot)=>{
+
+  const val =
+  snapshot.val();
+
+  if(val !== null){
+
+    winrateEl.textContent =
+    val + "%";
 
   }
 
