@@ -798,5 +798,60 @@ function toggleBalance(){
 
 </script>
 
+  <script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+  getDatabase,
+  ref,
+  onValue
+}
+from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+const firebaseConfig = {
+
+  apiKey: "PASTE_APIKEY",
+
+  authDomain: "PASTE_AUTHDOMAIN",
+
+  databaseURL: "PASTE_DATABASEURL",
+
+  projectId: "PASTE_PROJECTID",
+
+  storageBucket: "PASTE_STORAGE",
+
+  messagingSenderId: "PASTE_SENDERID",
+
+  appId: "PASTE_APPID"
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getDatabase(app);
+
+const balanceRef =
+ref(db, "account/balance");
+
+onValue(balanceRef, (snapshot)=>{
+
+  const value = snapshot.val();
+
+  if(value !== null){
+
+    document.getElementById(
+      "balanceAmount"
+    ).textContent = "$" + value;
+
+  }
+
+});
+
+</script>
+
 </body>
 </html>
