@@ -809,12 +809,13 @@ const db = getDatabase(app);
 // Elements
 const balanceEl = document.getElementById("balanceAmount");
 const eyeEl = document.getElementById("eyeIcon");
+const mt5StatusEl = document.getElementById("mt5Status");
 
 // State
 let balanceHidden = localStorage.getItem("balanceHidden") === "true";
 let currentBalance = 0;
 
-// Update UI
+// Update Balance UI
 function updateBalanceUI() {
   if (balanceHidden) {
     balanceEl.textContent = "••••••";
@@ -825,19 +826,36 @@ function updateBalanceUI() {
   }
 }
 
-// Toggle function
+// Toggle balance
 window.toggleBalance = function() {
   balanceHidden = !balanceHidden;
   localStorage.setItem("balanceHidden", balanceHidden);
   updateBalanceUI();
 };
 
-// Listen to Realtime Database
+// Listen to Realtime Database: balance
 const balanceRef = ref(db, "account/balance");
 onValue(balanceRef, (snapshot) => {
   const val = snapshot.val();
   if (val !== null) currentBalance = val;
   updateBalanceUI();
+});
+
+// Listen to Realtime Database: MT5 status
+const statusRef = ref(db, "account/status");
+onValue(statusRef, (snapshot) => {
+  const status = snapshot.val();
+  if (status === "CONNECTED") {
+    mt5StatusEl.innerHTML = "● MT5 CONNECTED";
+    mt5StatusEl.style.color = "#42ff8c";
+    mt5StatusEl.style.border = "1px solid rgba(0,255,140,0.3)";
+    mt5StatusEl.style.background = "rgba(0,255,140,0.08)";
+  } else {
+    mt5StatusEl.innerHTML = "● MT5 DISCONNECTED";
+    mt5StatusEl.style.color = "#ff5c5c";
+    mt5StatusEl.style.border = "1px solid rgba(255,0,0,0.3)";
+    mt5StatusEl.style.background = "rgba(255,0,0,0.08)";
+  }
 });
 
 // Initialize UI
