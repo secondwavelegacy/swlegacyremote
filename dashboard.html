@@ -463,43 +463,24 @@ body::after{
         <div style="margin-bottom:20px;">
 
           <div style="
-            display:flex;
-            justify-content:space-between;
-            margin-bottom:8px;
-          ">
-            <span class="small">Equity</span>
-            <span>$1,540</span>
-          </div>
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:8px;
+">
+  <span class="small">Equity</span>
+  <span id="equityValue">$1,540</span>
+</div>
 
-          <div style="
-            height:10px;
-            background:#111;
-            border-radius:20px;
-            overflow:hidden;
-          ">
-            <div style="
-              width:82%;
-              height:100%;
-              background:linear-gradient(
-                90deg,
-                #ffcc00,
-                #ff9800
-              );
-            "></div>
-          </div>
+...
 
-        </div>
-
-        <div>
-
-          <div style="
-            display:flex;
-            justify-content:space-between;
-            margin-bottom:8px;
-          ">
-            <span class="small">Daily Target</span>
-            <span>68%</span>
-          </div>
+<div style="
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:8px;
+">
+  <span class="small">Daily Target</span>
+  <span id="dailyTargetValue">68%</span>
+</div>
 
           <div style="
             height:10px;
@@ -788,6 +769,27 @@ document.getElementById("winrateValue");
 
 const tradesEl =
 document.getElementById("tradesValue");
+
+  const equityEl = document.getElementById("equityValue");
+const dailyTargetEl = document.getElementById("dailyTargetValue");
+
+// REALTIME EQUITY
+const equityRef = ref(db, "account/equity");
+onValue(equityRef, (snapshot) => {
+  const val = snapshot.val();
+  if (val !== null) {
+    equityEl.textContent = "$" + val;
+  }
+});
+
+// REALTIME DAILY TARGET
+const dailyTargetRef = ref(db, "account/dailyTarget");
+onValue(dailyTargetRef, (snapshot) => {
+  const val = snapshot.val();
+  if (val !== null) {
+    dailyTargetEl.textContent = val + "%";
+  }
+});
 
 // STATE
 let balanceHidden =
