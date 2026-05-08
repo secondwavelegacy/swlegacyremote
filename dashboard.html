@@ -852,17 +852,6 @@ onValue(balanceRef, (snapshot)=>{
 
 });
 
-  // REALTIME BALANCE
-const balanceRef = ref(db, "account/balance");
-
-onValue(balanceRef, (snapshot) => {
-  const val = snapshot.val();
-  console.log("Realtime balance dari Firebase:", val); // Debug
-  if(val !== null){
-    currentBalance = val;
-    updateBalanceUI();
-  }
-});
 
 // REALTIME MT5 STATUS
 const statusRef =
