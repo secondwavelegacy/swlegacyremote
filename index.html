@@ -1,60 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>XAUUSD View Only</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body{
-      margin:0;
-      background:#000;
-      overflow:hidden;
-      font-family:Arial;
-    }
+<title>XAUUSD View Only</title>
 
-    .tradingview-widget-container{
-      width:100%;
-      height:100vh;
-    }
+<style>
+html, body{
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+    background:#000;
+    overflow:hidden;
+}
 
-    .tradingview-widget-container__widget{
-      width:100%;
-      height:100%;
-    }
-  </style>
+.tradingview-widget-container{
+    width:100%;
+    height:100vh;
+}
+</style>
 </head>
 
 <body>
 
 <div class="tradingview-widget-container">
-  <div class="tradingview-widget-container__widget"></div>
+  <div id="tradingview_chart"></div>
 
   <script type="text/javascript"
-  src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"
-  async>
-  {
-    "autosize": true,
-    "symbol": "FX:XAUUSD",
-    "interval": "5",
-    "timezone": "Asia/Kuala_Lumpur",
-    "theme": "dark",
-    "style": "1",
-    "locale": "en",
+  src="https://www.tradingview.com/chart/EnUI8WrU/?symbol=FX%3AXAUUSD"></script>
 
-    "allow_symbol_change": false,
-    "hide_side_toolbar": true,
-    "withdateranges": false,
-    "details": false,
-    "hotlist": false,
-    "calendar": false,
-    "save_image": false,
+  <script type="text/javascript">
+  new TradingView.widget({
+      "autosize": true,
+      "symbol": "FOREXCOM:XAUUSD",
+      "interval": "5",
+      "timezone": "Asia/Kuala_Lumpur",
+      "theme": "dark",
+      "style": "1",
+      "locale": "en",
 
-    "studies": [
-      "RSI@tv-basicstudies",
-      "MASimple@tv-basicstudies"
-    ],
+      "toolbar_bg": "#000000",
 
-    "support_host": "https://www.tradingview.com"
-  }
+      "enable_publishing": false,
+      "allow_symbol_change": false,
+      "hide_side_toolbar": true,
+
+      "studies": [
+          "RSI@tv-basicstudies",
+          "MASimple@tv-basicstudies"
+      ],
+
+      "container_id": "tradingview_chart"
+  });
   </script>
 </div>
 
