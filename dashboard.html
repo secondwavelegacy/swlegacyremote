@@ -152,6 +152,24 @@ body::after{
   padding:22px;
   box-shadow:0 10px 40px rgba(0,0,0,0.3);
 }
+  <!-- LEFT -->
+<div>
+  <div class="card">
+
+    <div class="profile">
+      <div class="avatar" id="avatarText">ES</div>
+      <div>
+        <h2 id="clientName">Encik Shuq</h2>
+        <p class="small">Realtime MT5 Control</p>
+      </div>
+    </div>
+
+    <div class="stats">
+      <!-- Mini cards seperti Winrate & Trades -->
+    </div>
+
+  </div>
+</div>
 
 .title{
   font-size:18px;
@@ -342,6 +360,29 @@ const db=getDatabase(app);
 const balanceEl=document.getElementById("balanceAmount");
 const eyeEl=document.getElementById("eyeIcon");
 const mt5StatusEl=document.getElementById("mt5Status");
+  
+// Elements
+const avatarEl = document.getElementById("avatarText");
+const clientNameEl = document.getElementById("clientName");
+
+// Firebase reference for name
+const nameRef = ref(db, "account/name");
+
+// Listen for name changes
+onValue(nameRef, (snapshot) => {
+  const name = snapshot.val();
+  if (name) {
+    clientNameEl.textContent = name;
+
+    // Update avatar initials
+    avatarEl.textContent = name
+      .split(" ")
+      .map(n => n[0])
+      .join("")
+      .toUpperCase();
+  }
+});
+  
 const equityAmount=document.getElementById("equityAmount");
 const equityBar=document.getElementById("equityBar");
 
