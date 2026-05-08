@@ -852,17 +852,6 @@ onValue(balanceRef, (snapshot)=>{
 
 });
 
-  // TEST LANGSUNG
-get(ref(db, "account/balance"))
-  .then((snapshot) => {
-    if (snapshot.exists()) {
-      console.log("Test balance langsung:", snapshot.val());
-    } else {
-      console.log("Node balance tidak ada");
-    }
-  })
-  .catch((err) => console.error("Error baca balance:", err));
-
 
 // REALTIME MT5 STATUS
 const statusRef =
