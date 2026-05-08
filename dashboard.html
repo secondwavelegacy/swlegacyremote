@@ -692,33 +692,49 @@ function openFullscreenChart() {
 
 }
 
-let balanceHidden = false;
+let balanceHidden =
+localStorage.getItem("balanceHidden") === "true";
 
-function toggleBalance(){
+const balance =
+document.getElementById('balanceAmount');
 
-  const balance =
-    document.getElementById('balanceAmount');
+const eye =
+document.getElementById('eyeIcon');
 
-  const eye =
-    document.getElementById('eyeIcon');
+function updateBalanceUI(){
 
   if(balanceHidden){
 
-    balance.textContent = "$12,540";
-   eye.innerHTML = '<i class="fa-solid fa-eye"></i>';
+    balance.textContent = "••••••";
 
-    balanceHidden = false;
+    eye.innerHTML =
+    '<i class="fa-solid fa-eye-slash"></i>';
 
   }else{
 
-    balance.textContent = "••••••";
-    eye.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+    balance.textContent = "$12,540";
 
-    balanceHidden = true;
+    eye.innerHTML =
+    '<i class="fa-solid fa-eye"></i>';
 
   }
 
 }
+
+function toggleBalance(){
+
+  balanceHidden = !balanceHidden;
+
+  localStorage.setItem(
+    "balanceHidden",
+    balanceHidden
+  );
+
+  updateBalanceUI();
+
+}
+
+updateBalanceUI();
 
 </script>
 
