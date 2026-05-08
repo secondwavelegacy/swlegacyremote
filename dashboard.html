@@ -854,21 +854,6 @@ initializeApp(firebaseConfig);
 const db =
 getDatabase(app);
 
-const balanceRef =
-ref(db, "account/balance");
-
-onValue(balanceRef, (snapshot)=>{
-
-  const balance =
-  snapshot.val();
-
-  document.getElementById(
-    "balanceAmount"
-  ).innerHTML =
-  "$" + balance;
-
-});
-
     const statusRef =
 ref(db, "account/status");
 
