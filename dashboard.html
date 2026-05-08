@@ -693,46 +693,51 @@ gap:15px;
 
 <script>
 
-setTimeout(() => {
+function loadTradingView(){
+
+  if(typeof TradingView === 'undefined'){
+    return;
+  }
 
   new TradingView.widget({
 
-    "container_id": "tradingview_chart",
-    "autosize": true,
-    "symbol": "OANDA:XAUUSD",
-    "interval": "15",
-    "timezone": "Asia/Kuala_Lumpur",
-    "theme": "dark",
-    "style": "1",
-    "locale": "en",
-    "toolbar_bg": "#0f0f0f",
-    "enable_publishing": false,
-    "allow_symbol_change": true,
-    "hide_top_toolbar": false,
-    "hide_side_toolbar": false
+    container_id: "tradingview_chart",
+
+    autosize: true,
+
+    symbol: "OANDA:XAUUSD",
+
+    interval: "15",
+
+    timezone: "Asia/Kuala_Lumpur",
+
+    theme: "dark",
+
+    style: "1",
+
+    locale: "en",
+
+    toolbar_bg: "#0f0f0f",
+
+    enable_publishing: false,
+
+    allow_symbol_change: true,
+
+    hide_top_toolbar: false,
+
+    hide_side_toolbar: false
 
   });
 
-}, 500);
+}
+
+window.onload = function(){
+
+  setTimeout(loadTradingView, 1000);
+
+};
 
 </script>
-
-</script>
-
-function openFullscreenChart() {
-
-  const chart =
-    document.querySelector('.chart');
-
-  if (chart.requestFullscreen) {
-    chart.requestFullscreen();
-  } 
-  else if (chart.webkitRequestFullscreen) {
-    chart.webkitRequestFullscreen();
-  } 
-  else if (chart.msRequestFullscreen) {
-    chart.msRequestFullscreen();
-  }
 
 }
 
