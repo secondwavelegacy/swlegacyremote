@@ -880,26 +880,28 @@ onValue(statusRef, (snapshot)=>{
     box.innerHTML =
     "● MT5 CONNECTED";
 
-    box.classList.remove(
-      "disconnected"
-    );
+    box.style.color =
+    "#42ff8c";
 
-    box.classList.add(
-      "connected"
-    );
+    box.style.border =
+    "1px solid rgba(0,255,140,0.3)";
+
+    box.style.background =
+    "rgba(0,255,140,0.08)";
 
   }else{
 
     box.innerHTML =
     "● MT5 DISCONNECTED";
 
-    box.classList.remove(
-      "connected"
-    );
+    box.style.color =
+    "#ff5c5c";
 
-    box.classList.add(
-      "disconnected"
-    );
+    box.style.border =
+    "1px solid rgba(255,0,0,0.3)";
+
+    box.style.background =
+    "rgba(255,0,0,0.08)";
 
   }
 
