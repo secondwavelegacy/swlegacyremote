@@ -695,21 +695,29 @@ gap:15px;
 
 <script>
 
-new TradingView.widget({
-  "autosize": true,
-  "symbol": "OANDA:XAUUSD",
-  "interval": "15",
-  "timezone": "Asia/Kuala_Lumpur",
-  "theme": "dark",
-  "style": "1",
-  "locale": "en",
-  "toolbar_bg": "#0f0f0f",
-  "enable_publishing": false,
-  "allow_symbol_change": true,
-  "hide_top_toolbar": false,
-  "hide_side_toolbar": false,
-  "container_id": "tradingview_chart"
-});
+setTimeout(() => {
+
+  new TradingView.widget({
+
+    "container_id": "tradingview_chart",
+    "autosize": true,
+    "symbol": "OANDA:XAUUSD",
+    "interval": "15",
+    "timezone": "Asia/Kuala_Lumpur",
+    "theme": "dark",
+    "style": "1",
+    "locale": "en",
+    "toolbar_bg": "#0f0f0f",
+    "enable_publishing": false,
+    "allow_symbol_change": true,
+    "hide_top_toolbar": false,
+    "hide_side_toolbar": false
+
+  });
+
+}, 500);
+
+</script>
 
 </script>
 
