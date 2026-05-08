@@ -1,1 +1,610 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SECOND WAVE AI</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    .live-title{
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.live-title:hover{
+  color:#ffb300;
+  transform:translateX(4px);
+}
+
+    body{
+      background:#050505;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:'';
+      position:fixed;
+      width:500px;
+      height:500px;
+      background:rgba(255,174,0,0.12);
+      filter:blur(120px);
+      top:-100px;
+      left:-100px;
+      z-index:-1;
+    }
+
+    body::after{
+      content:'';
+      position:fixed;
+      width:400px;
+      height:400px;
+      background:rgba(255,120,0,0.10);
+      filter:blur(120px);
+      bottom:-100px;
+      right:-100px;
+      z-index:-1;
+    }
+
+    .container{
+      padding:20px;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.05);
+      backdrop-filter:blur(20px);
+      border-radius:25px;
+      margin-bottom:20px;
+    }
+
+    .logo h1{
+      color:#ffb300;
+      letter-spacing:3px;
+      font-size:30px;
+    }
+
+    .logo p{
+      color:rgba(255,255,255,0.45);
+      margin-top:5px;
+      font-size:13px;
+    }
+
+    .status{
+      display:flex;
+      gap:15px;
+      flex-wrap:wrap;
+    }
+
+    .status-box{
+      padding:12px 18px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      font-size:14px;
+    }
+
+    .connected{
+      color:#42ff8c;
+      border:1px solid rgba(66,255,140,0.3);
+      background:rgba(66,255,140,0.08);
+    }
+
+    .dashboard{
+      display:grid;
+      grid-template-columns:1fr 2fr 1fr;
+      gap:20px;
+    }
+
+    .card{
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      backdrop-filter:blur(20px);
+      border-radius:28px;
+      padding:22px;
+      box-shadow:0 10px 40px rgba(0,0,0,0.3);
+    }
+
+    .title{
+      font-size:18px;
+      margin-bottom:18px;
+      font-weight:600;
+    }
+
+    .profile{
+      display:flex;
+      align-items:center;
+      gap:15px;
+      margin-bottom:25px;
+    }
+
+    .avatar{
+      width:65px;
+      height:65px;
+      border-radius:20px;
+      background:linear-gradient(135deg,#ffb300,#ff6b00);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      color:black;
+      font-weight:700;
+      font-size:22px;
+    }
+
+    .small{
+      color:rgba(255,255,255,0.45);
+      font-size:13px;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:15px;
+    }
+
+    .mini-card{
+      background:rgba(0,0,0,0.25);
+      border-radius:18px;
+      padding:18px;
+    }
+
+    .mini-card h2{
+      margin-top:8px;
+      font-size:24px;
+    }
+
+    .control-btn{
+      width:100%;
+      border:none;
+      padding:16px;
+      border-radius:18px;
+      margin-bottom:14px;
+      font-weight:600;
+      color:white;
+      cursor:pointer;
+      transition:0.3s;
+      font-size:15px;
+    }
+
+    .control-btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .red{
+      background:linear-gradient(135deg,#ff3c3c,#ff6b00);
+    }
+
+    .blue{
+      background:linear-gradient(135deg,#2979ff,#00c6ff);
+    }
+
+    .gold{
+      background:linear-gradient(135deg,#ffcc00,#ff9800);
+      color:black;
+    }
+
+    .chart{
+      height:520px;
+      border-radius:28px;
+      background:linear-gradient(135deg,#070707,#111);
+      border:1px solid rgba(255,255,255,0.08);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .chart::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at top, rgba(255,179,0,0.2), transparent 50%);
+    }
+
+    .chart-content{
+      text-align:center;
+      z-index:2;
+    }
+
+    .chart-content h1{
+      font-size:48px;
+      letter-spacing:5px;
+      color:#ffb300;
+    }
+
+    .chart-content p{
+      color:rgba(255,255,255,0.4);
+      margin-top:10px;
+    }
+
+    .trade{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:18px;
+      border-radius:20px;
+      background:rgba(0,0,0,0.25);
+      margin-bottom:15px;
+      border:1px solid rgba(255,255,255,0.05);
+    }
+
+    .trade-left{
+      display:flex;
+      align-items:center;
+      gap:15px;
+    }
+
+    .type{
+      width:55px;
+      height:55px;
+      border-radius:18px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-weight:700;
+    }
+
+    .buy{
+      background:rgba(0,255,140,0.12);
+      color:#42ff8c;
+    }
+
+    .sell{
+      background:rgba(255,80,80,0.12);
+      color:#ff6767;
+    }
+
+    .profit{
+      color:#42ff8c;
+      font-weight:700;
+      margin-bottom:10px;
+    }
+
+    .close-btn{
+      border:none;
+      padding:12px 18px;
+      border-radius:14px;
+      background:rgba(255,80,80,0.15);
+      color:#ff7a7a;
+      cursor:pointer;
+    }
+
+    .feed{
+      padding:15px;
+      border-radius:18px;
+      background:rgba(0,0,0,0.25);
+      margin-bottom:12px;
+      color:rgba(255,255,255,0.75);
+      font-size:14px;
+    }
+
+    .footer-box{
+      background:linear-gradient(135deg,#ffcc00,#ff8f00);
+      color:black;
+    }
+
+    .footer-box p{
+      margin-top:10px;
+      color:rgba(0,0,0,0.7);
+      line-height:1.6;
+    }
+
+    @media(max-width:1100px){
+      .dashboard{
+        grid-template-columns:1fr;
+      }
+
+      .chart{
+        height:400px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="topbar">
+
+    <div class="logo">
+      <h1>SECOND WAVE</h1>
+      <p>Institutional EA Control Panel</p>
+    </div>
+
+    <div class="status">
+      <div class="status-box connected">
+        ● MT5 CONNECTED
+      </div>
+
+      <div class="status-box">
+        Balance : $12,540
+      </div>
+    </div>
+
+  </div>
+
+  <div class="dashboard">
+
+    <!-- LEFT PANEL -->
+    <div>
+
+      <div class="card">
+
+        <div class="profile">
+          <div class="avatar">SW</div>
+
+          <div>
+            <h2>Second Wave AI</h2>
+            <p class="small">Realtime MT5 Control</p>
+          </div>
+        </div>
+
+        <div class="stats">
+
+          <div class="mini-card">
+            <p class="small">Winrate</p>
+            <h2>87%</h2>
+          </div>
+
+          <div class="mini-card">
+            <p class="small">Trades</p>
+            <h2>124</h2>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="card" style="margin-top:20px;">
+
+        <div class="title">
+          Quick Controls
+        </div>
+
+        <button class="control-btn red">
+          CLOSE ALL TRADES
+        </button>
+
+        <button class="control-btn blue">
+          MOVE TO BREAKEVEN
+        </button>
+
+        <button class="control-btn gold">
+          LOCK PROFIT
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- CENTER -->
+    <div>
+
+      <div class="card">
+
+        <div class="title">
+          Live Market View
+        </div>
+
+        <div class="card">
+
+  <div class="title live-title" onclick="openFullscreenChart()">
+    Live Market View ⛶
+  </div>
+
+  <div class="chart">
+
+    <div class="tradingview-widget-container">
+      <div id="tradingview_chart" style="height:100%; width:100%;"></div>
+
+      <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+
+      <script type="text/javascript">
+        new TradingView.widget({
+          "width": "100%",
+          "height": "100%",
+          "symbol": "OANDA:XAUUSD",
+          "interval": "15",
+          "timezone": "Asia/Kuala_Lumpur",
+          "theme": "dark",
+          "style": "1",
+          "locale": "en",
+          "toolbar_bg": "#0f0f0f",
+          "enable_publishing": false,
+          "allow_symbol_change": true,
+          "hide_top_toolbar": false,
+          "hide_side_toolbar": false,
+          "container_id": "tradingview_chart"
+        });
+      </script>
+    </div>
+
+  </div>
+
+</div>
+
+      <div class="card" style="margin-top:20px;">
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+          <div class="title" style="margin:0;">
+            Active Positions
+          </div>
+
+          <div class="profit">
+            Floating +$170.50
+          </div>
+        </div>
+
+        <div class="trade">
+
+          <div class="trade-left">
+
+            <div class="type buy">
+              BUY
+            </div>
+
+            <div>
+              <h3>XAUUSD</h3>
+              <p class="small">Lot 0.10 • RR 1:2.5</p>
+            </div>
+
+          </div>
+
+          <div>
+            <div class="profit">
+              +128.40
+            </div>
+
+            <button class="close-btn">
+              Close
+            </button>
+          </div>
+
+        </div>
+
+        <div class="trade">
+
+          <div class="trade-left">
+
+            <div class="type sell">
+              SELL
+            </div>
+
+            <div>
+              <h3>GBPJPY</h3>
+              <p class="small">Lot 0.05 • RR 1:1.8</p>
+            </div>
+
+          </div>
+
+          <div>
+            <div class="profit">
+              +42.10
+            </div>
+
+            <button class="close-btn">
+              Close
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div>
+
+      <div class="card">
+
+        <div class="title">
+          Account Analytics
+        </div>
+
+        <div style="margin-bottom:20px;">
+
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+            <span class="small">Equity</span>
+            <span>$13,240</span>
+          </div>
+
+          <div style="height:10px;background:#111;border-radius:20px;overflow:hidden;">
+            <div style="width:82%;height:100%;background:linear-gradient(90deg,#ffcc00,#ff9800);"></div>
+          </div>
+
+        </div>
+
+        <div>
+
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+            <span class="small">Daily Target</span>
+            <span>68%</span>
+          </div>
+
+          <div style="height:10px;background:#111;border-radius:20px;overflow:hidden;">
+            <div style="width:68%;height:100%;background:linear-gradient(90deg,#00ff99,#00cc66);"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="card" style="margin-top:20px;">
+
+        <div class="title">
+          Signal Feed
+        </div>
+
+        <div class="feed">
+          BUY XAUUSD confirmed
+        </div>
+
+        <div class="feed">
+          SL moved to breakeven
+        </div>
+
+        <div class="feed">
+          TP1 reached GBPJPY
+        </div>
+
+        <div class="feed">
+          Liquidity sweep detected
+        </div>
+
+      </div>
+
+      <div class="card footer-box" style="margin-top:20px;">
+
+        <h2>SECOND WAVE AI</h2>
+
+        <p>
+          Premium institutional-grade remote trading control system for MetaTrader 5.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+  <script>
+
+function openFullscreenChart() {
+
+  const chart = document.querySelector('.chart');
+
+  if (chart.requestFullscreen) {
+    chart.requestFullscreen();
+  } 
+  else if (chart.webkitRequestFullscreen) {
+    chart.webkitRequestFullscreen();
+  } 
+  else if (chart.msRequestFullscreen) {
+    chart.msRequestFullscreen();
+  }
+
+}
+
+</script>
+
+</body>
+</html>
