@@ -812,30 +812,47 @@ from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
 
 const firebaseConfig = {
 
-  apiKey: "PASTE_APIKEY",
-
-  authDomain: "PASTE_AUTHDOMAIN",
-
-  databaseURL: "PASTE_DATABASEURL",
-
-  projectId: "PASTE_PROJECTID",
-
-  storageBucket: "PASTE_STORAGE",
-
-  messagingSenderId: "PASTE_SENDERID",
-
-  appId: "PASTE_APPID"
-
-};
-
-const firebaseConfig = {
   apiKey: "AIzaSyCqxsYWRuwfS2lsc2v6qmzB_LFR3HGx3H8",
+
   authDomain: "sw-legacy-manager.firebaseapp.com",
+
+  databaseURL:
+  "https://sw-legacy-manager-default-rtdb.asia-southeast1.firebasedatabase.app",
+
   projectId: "sw-legacy-manager",
-  storageBucket: "sw-legacy-manager.firebasestorage.app",
+
+  storageBucket:
+  "sw-legacy-manager.firebasestorage.app",
+
   messagingSenderId: "267816826332",
-  appId: "1:267816826332:web:7499b47bdb5a0679024b19"
+
+  appId:
+  "1:267816826332:web:7499b47bdb5a0679024b19"
+
 };
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getDatabase(app);
+
+const balanceRef =
+ref(db, "account/balance");
+
+onValue(balanceRef, (snapshot)=>{
+
+  const value = snapshot.val();
+
+  if(value !== null){
+
+    document.getElementById(
+      "balanceAmount"
+    ).textContent = "$" + value;
+
+  }
+
+});
 
 </script>
 
