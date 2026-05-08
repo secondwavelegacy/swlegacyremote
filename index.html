@@ -13,9 +13,9 @@ html,body{
     padding:0;
     width:100%;
     height:100%;
-    background:#000;
-    font-family:Arial,sans-serif;
     overflow:hidden;
+    font-family:Arial,sans-serif;
+    background:#000;
 }
 
 /* MENU */
@@ -55,11 +55,6 @@ p{
     border-radius:12px;
     font-size:20px;
     cursor:pointer;
-    transition:0.3s;
-}
-
-.button:hover{
-    transform:scale(1.05);
 }
 
 /* CHART */
@@ -71,6 +66,12 @@ p{
     position:relative;
 }
 
+iframe{
+    width:100%;
+    height:100%;
+    border:none;
+}
+
 .backBtn{
     position:absolute;
     top:15px;
@@ -80,11 +81,6 @@ p{
     border:1px solid #444;
     width:auto;
     padding:12px 20px;
-}
-
-.tradingview-widget-container{
-    width:100%;
-    height:100vh;
 }
 
 </style>
@@ -100,7 +96,7 @@ p{
 
         <h1>Second Wave App</h1>
 
-        <p>XAUUSD TradingView Access</p>
+        <p>XAUUSD Trading Access</p>
 
         <button class="button" onclick="openChart()">
             Open Trading
@@ -118,13 +114,11 @@ p{
         ⬅ Back
     </button>
 
-    <div class="tradingview-widget-container">
-      <div id="tradingview_chart"></div>
-    </div>
+    <iframe
+    src="https://www.tradingview.com/chart/EnUI8WrU/?symbol=FX%3AXAUUSD">
+    </iframe>
 
 </div>
-
-<script src="https://www.tradingview.com/chart/?symbol=FX:XAUUSD"></script>
 
 <script>
 
@@ -133,33 +127,6 @@ function openChart(){
     document.getElementById("menuPage").style.display = "none";
 
     document.getElementById("chartPage").style.display = "block";
-
-    if(!window.tvLoaded){
-
-        new TradingView.widget({
-            "autosize": true,
-            "symbol": "OANDA:XAUUSD",
-            "interval": "5",
-            "timezone": "Asia/Kuala_Lumpur",
-            "theme": "dark",
-            "style": "1",
-            "locale": "en",
-
-            "hide_top_toolbar": true,
-            "hide_side_toolbar": true,
-            "allow_symbol_change": false,
-            "save_image": false,
-
-            "studies": [
-                "RSI@tv-basicstudies",
-                "MASimple@tv-basicstudies"
-            ],
-
-            "container_id": "tradingview_chart"
-        });
-
-        window.tvLoaded = true;
-    }
 }
 
 function goBackMenu(){
