@@ -1,74 +1,241 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+export default function SecondWaveDashboard() {
+  const positions = [
+    {
+      pair: 'XAUUSD',
+      type: 'BUY',
+      lot: '0.10',
+      profit: '+128.40',
+      rr: '1:2.5',
+    },
+    {
+      pair: 'GBPJPY',
+      type: 'SELL',
+      lot: '0.05',
+      profit: '+42.10',
+      rr: '1:1.8',
+    },
+  ]
 
-<title>Second Wave App</title>
+  return (
+    <div className="min-h-screen bg-black text-white overflow-hidden relative">
+      {/* Background Glow */}
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-yellow-500/10 blur-3xl rounded-full" />
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-orange-500/10 blur-3xl rounded-full" />
 
-<style>
+      {/* Header */}
+      <header className="relative z-10 flex items-center justify-between px-8 py-6 border-b border-white/10 backdrop-blur-xl bg-white/5">
+        <div>
+          <h1 className="text-3xl font-bold tracking-widest text-yellow-400">
+            SECOND WAVE
+          </h1>
+          <p className="text-sm text-white/50 mt-1">
+            Smart EA Control Dashboard
+          </p>
+        </div>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+        <div className="flex items-center gap-4">
+          <div className="bg-green-500/20 border border-green-500/40 px-4 py-2 rounded-full text-sm text-green-300">
+            MT5 CONNECTED
+          </div>
+
+          <div className="bg-white/10 border border-white/10 px-4 py-2 rounded-full text-sm">
+            Balance: $12,540
+          </div>
+        </div>
+      </header>
+
+      {/* Main Layout */}
+      <main className="relative z-10 grid grid-cols-1 lg:grid-cols-4 gap-6 p-6">
+        {/* Left Panel */}
+        <section className="lg:col-span-1 space-y-6">
+          {/* Profile Card */}
+          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl shadow-2xl">
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-black font-bold text-xl">
+                SW
+              </div>
+
+              <div>
+                <h2 className="font-semibold text-lg">Second Wave EA</h2>
+                <p className="text-white/50 text-sm">Realtime MT5 Control</p>
+              </div>
+            </div>
+
+            <div className="mt-6 grid grid-cols-2 gap-4">
+              <div className="bg-black/30 rounded-2xl p-4 border border-white/5">
+                <p className="text-white/40 text-sm">Winrate</p>
+                <h3 className="text-2xl font-bold mt-1">87%</h3>
+              </div>
+
+              <div className="bg-black/30 rounded-2xl p-4 border border-white/5">
+                <p className="text-white/40 text-sm">Trades</p>
+                <h3 className="text-2xl font-bold mt-1">124</h3>
+              </div>
+            </div>
+          </div>
+
+          {/* Quick Controls */}
+          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl shadow-2xl">
+            <h3 className="text-lg font-semibold mb-5">Quick Controls</h3>
+
+            <div className="space-y-4">
+              <button className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:scale-[1.02] transition-all rounded-2xl py-4 font-semibold shadow-lg">
+                CLOSE ALL TRADES
+              </button>
+
+              <button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:scale-[1.02] transition-all rounded-2xl py-4 font-semibold shadow-lg">
+                MOVE TO BREAKEVEN
+              </button>
+
+              <button className="w-full bg-gradient-to-r from-yellow-400 to-amber-500 text-black hover:scale-[1.02] transition-all rounded-2xl py-4 font-semibold shadow-lg">
+                LOCK PROFIT
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Center Panel */}
+        <section className="lg:col-span-2 space-y-6">
+          {/* Chart Placeholder */}
+          <div className="bg-white/5 border border-white/10 rounded-3xl p-4 backdrop-blur-xl shadow-2xl">
+            <div className="flex items-center justify-between mb-4 px-2">
+              <div>
+                <h3 className="text-xl font-semibold">Live Market View</h3>
+                <p className="text-white/40 text-sm">TradingView / MT5 Stream</p>
+              </div>
+
+              <div className="flex gap-2">
+                {['M5', 'M15', 'H1', 'H4'].map((tf) => (
+                  <button
+                    key={tf}
+                    className="px-4 py-2 rounded-xl bg-black/40 border border-white/10 hover:bg-yellow-400 hover:text-black transition-all text-sm"
+                  >
+                    {tf}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="h-[500px] rounded-3xl bg-gradient-to-br from-black to-zinc-900 border border-white/10 flex items-center justify-center relative overflow-hidden">
+              <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top,_rgba(255,215,0,0.25),transparent_50%)]" />
+
+              <div className="text-center z-10">
+                <h2 className="text-4xl font-bold text-yellow-400 tracking-widest">
+                  SECOND WAVE
+                </h2>
+                <p className="text-white/40 mt-3">
+                  Live Chart Stream Area
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Active Trades */}
+          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl shadow-2xl">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-semibold">Active Positions</h3>
+
+              <div className="text-green-400 font-semibold">
+                Floating +$170.50
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              {positions.map((trade, idx) => (
+                <div
+                  key={idx}
+                  className="bg-black/30 border border-white/5 rounded-2xl p-5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 hover:border-yellow-400/20 transition-all"
+                >
+                  <div className="flex items-center gap-5">
+                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center font-bold ${trade.type === 'BUY' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
+                      {trade.type}
+                    </div>
+
+                    <div>
+                      <h4 className="text-lg font-semibold">{trade.pair}</h4>
+                      <p className="text-white/40 text-sm">
+                        Lot {trade.lot} • RR {trade.rr}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3">
+                    <div className="text-green-400 font-bold text-lg">
+                      {trade.profit}
+                    </div>
+
+                    <button className="px-5 py-3 rounded-2xl bg-red-500/20 border border-red-500/30 text-red-300 hover:bg-red-500/30 transition-all">
+                      Close
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Right Panel */}
+        <section className="lg:col-span-1 space-y-6">
+          {/* Account Stats */}
+          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl shadow-2xl">
+            <h3 className="text-lg font-semibold mb-5">Account Analytics</h3>
+
+            <div className="space-y-5">
+              <div>
+                <div className="flex justify-between mb-2 text-sm text-white/50">
+                  <span>Equity</span>
+                  <span>$13,240</span>
+                </div>
+                <div className="w-full h-3 bg-black/40 rounded-full overflow-hidden">
+                  <div className="w-[82%] h-full bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full" />
+                </div>
+              </div>
+
+              <div>
+                <div className="flex justify-between mb-2 text-sm text-white/50">
+                  <span>Daily Target</span>
+                  <span>68%</span>
+                </div>
+                <div className="w-full h-3 bg-black/40 rounded-full overflow-hidden">
+                  <div className="w-[68%] h-full bg-gradient-to-r from-green-400 to-emerald-500 rounded-full" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Signal Feed */}
+          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl shadow-2xl">
+            <div className="flex items-center justify-between mb-5">
+              <h3 className="text-lg font-semibold">Signal Feed</h3>
+              <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse" />
+            </div>
+
+            <div className="space-y-4">
+              {[
+                'BUY XAUUSD confirmed',
+                'SL moved to breakeven',
+                'TP1 reached GBPJPY',
+                'Liquidity sweep detected',
+              ].map((item, idx) => (
+                <div
+                  key={idx}
+                  className="bg-black/30 border border-white/5 rounded-2xl p-4 text-sm text-white/70"
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Footer */}
+          <div className="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-3xl p-6 text-black shadow-2xl">
+            <h3 className="text-xl font-bold">SECOND WAVE AI</h3>
+            <p className="mt-2 text-black/70 text-sm leading-relaxed">
+              Premium institutional-grade remote trading control system for MetaTrader 5.
+            </p>
+          </div>
+        </section>
+      </main>
+    </div>
+  )
 }
-
-body{
-    background:#0d0d0d;
-    font-family:Arial,sans-serif;
-    color:white;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.container{
-    text-align:center;
-}
-
-h1{
-    font-size:42px;
-    margin-bottom:15px;
-}
-
-p{
-    color:#999;
-    margin-bottom:40px;
-}
-
-.button{
-    display:block;
-    width:280px;
-    margin:15px auto;
-    padding:18px;
-    background:#2962ff;
-    color:white;
-    text-decoration:none;
-    border-radius:12px;
-    font-size:20px;
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<h1>Second Wave App</h1>
-
-<p>XAUUSD Trading Access</p>
-
-<a class="button"
-href="https://www.tradingview.com/chart/">
-
-Open Trading
-
-</a>
-
-</div>
-
-</body>
-</html>
