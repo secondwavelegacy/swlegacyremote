@@ -828,28 +828,14 @@ const firebaseConfig = {
 
 };
 
-const app =
-initializeApp(firebaseConfig);
-
-const db =
-getDatabase(app);
-
-const balanceRef =
-ref(db, "account/balance");
-
-onValue(balanceRef, (snapshot)=>{
-
-  const value = snapshot.val();
-
-  if(value !== null){
-
-    document.getElementById(
-      "balanceAmount"
-    ).textContent = "$" + value;
-
-  }
-
-});
+const firebaseConfig = {
+  apiKey: "AIzaSyCqxsYWRuwfS2lsc2v6qmzB_LFR3HGx3H8",
+  authDomain: "sw-legacy-manager.firebaseapp.com",
+  projectId: "sw-legacy-manager",
+  storageBucket: "sw-legacy-manager.firebasestorage.app",
+  messagingSenderId: "267816826332",
+  appId: "1:267816826332:web:7499b47bdb5a0679024b19"
+};
 
 </script>
 
