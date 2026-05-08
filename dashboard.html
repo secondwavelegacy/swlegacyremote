@@ -412,71 +412,26 @@ if(localStorage.getItem("loggedIn") !== "true"){
 
         <div class="card">
 
-  <!-- TOP BAR -->
-
-  <div style="
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:18px;
-    flex-wrap:wrap;
-    gap:12px;
-  ">
 
     <div class="title live-title" onclick="openFullscreenChart()">
       Live Market View ⛶
     </div>
 
-    <!-- CONTROLS -->
+    <div class="card">
 
-    <div style="
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-    ">
+  <div class="title live-title" onclick="openFullscreenChart()">
+    Live Market View ⛶
+  </div>
 
-      <!-- PAIR -->
+  <div class="chart">
 
-      <select id="pairSelect" onchange="changePair()" style="
-        background:#111;
-        color:white;
-        border:1px solid rgba(255,255,255,0.1);
-        padding:10px 14px;
-        border-radius:12px;
-        outline:none;
-      ">
-        <option value="OANDA:XAUUSD">XAUUSD</option>
-        <option value="FX:EURUSD">EURUSD</option>
-        <option value="FX:GBPUSD">GBPUSD</option>
-        <option value="BINANCE:BTCUSDT">BTCUSD</option>
-      </select>
-
-      <!-- TIMEFRAMES -->
-
-      <div style="display:flex;gap:8px;">
-
-        <button class="tf-btn" onclick="changeTF('5')">
-          M5
-        </button>
-
-        <button class="tf-btn" onclick="changeTF('15')">
-          M15
-        </button>
-
-        <button class="tf-btn" onclick="changeTF('60')">
-          H1
-        </button>
-
-        <button class="tf-btn" onclick="changeTF('240')">
-          H4
-        </button>
-
-      </div>
-
+    <div class="tradingview-widget-container">
+      <div id="tradingview_chart" style="height:100%; width:100%;"></div>
     </div>
 
   </div>
+
+</div>
 
   <!-- CHART -->
 
