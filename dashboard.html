@@ -834,23 +834,18 @@ window.toggleBalance = function(){
 };
 
 // REALTIME BALANCE
-const balanceRef =
-ref(db, "account/balance");
+const balanceRef = ref(db, "account/balance");
 
-onValue(balanceRef, (snapshot)=>{
-
-  const val =
-  snapshot.val();
-
+onValue(balanceRef, (snapshot) => {
+  const val = snapshot.val();
+  console.log("Realtime balance dari Firebase:", val); // Debug
   if(val !== null){
-
     currentBalance = val;
-
+    updateBalanceUI();
   }
-
-  updateBalanceUI();
-
 });
+
+yang ni nak letak dimana
 
 
 // REALTIME MT5 STATUS
