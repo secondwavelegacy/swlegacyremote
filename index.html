@@ -4,57 +4,172 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Second Wave Chart</title>
+<title>Second Wave App</title>
 
 <style>
+
 html,body{
     margin:0;
+    padding:0;
     width:100%;
     height:100%;
-    overflow:hidden;
     background:#000;
+    font-family:Arial,sans-serif;
+    overflow:hidden;
+}
+
+/* MENU */
+
+#menuPage{
+    width:100%;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#0d0d0d;
+    color:white;
+}
+
+.container{
+    text-align:center;
+}
+
+h1{
+    font-size:42px;
+    margin-bottom:15px;
+}
+
+p{
+    color:#999;
+    margin-bottom:40px;
+}
+
+.button{
+    display:block;
+    width:260px;
+    margin:15px auto;
+    padding:18px;
+    background:#2962ff;
+    color:white;
+    border:none;
+    border-radius:12px;
+    font-size:20px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.button:hover{
+    transform:scale(1.05);
+}
+
+/* CHART */
+
+#chartPage{
+    display:none;
+    width:100%;
+    height:100vh;
+    position:relative;
+}
+
+.backBtn{
+    position:absolute;
+    top:15px;
+    left:15px;
+    z-index:9999;
+    background:#111;
+    border:1px solid #444;
+    width:auto;
+    padding:12px 20px;
 }
 
 .tradingview-widget-container{
     width:100%;
     height:100vh;
 }
+
 </style>
 </head>
 
 <body>
 
-<div class="tradingview-widget-container">
-  <div id="tradingview_chart"></div>
+<!-- MENU -->
 
-<script type="text/javascript"
-src="https://s3.tradingview.com/tv.js"></script>
+<div id="menuPage">
 
-<script type="text/javascript">
-new TradingView.widget({
-    "autosize": true,
-    "symbol": "OANDA:XAUUSD",
-    "interval": "5",
-    "timezone": "Asia/Kuala_Lumpur",
-    "theme": "dark",
-    "style": "1",
-    "locale": "en",
+    <div class="container">
 
-    "hide_top_toolbar": true,
-    "hide_side_toolbar": true,
-    "allow_symbol_change": false,
-    "save_image": false,
+        <h1>Second Wave App</h1>
 
-    "studies": [
-        "RSI@tv-basicstudies",
-        "MASimple@tv-basicstudies"
-    ],
+        <p>XAUUSD TradingView Access</p>
 
-    "container_id": "tradingview_chart"
-});
-</script>
+        <button class="button" onclick="openChart()">
+            Open Trading
+        </button>
+
+    </div>
 
 </div>
+
+<!-- CHART -->
+
+<div id="chartPage">
+
+    <button class="button backBtn" onclick="goBackMenu()">
+        ⬅ Back
+    </button>
+
+    <div class="tradingview-widget-container">
+      <div id="tradingview_chart"></div>
+    </div>
+
+</div>
+
+<script src="https://www.tradingview.com/chart/?symbol=FX:XAUUSD"></script>
+
+<script>
+
+function openChart(){
+
+    document.getElementById("menuPage").style.display = "none";
+
+    document.getElementById("chartPage").style.display = "block";
+
+    if(!window.tvLoaded){
+
+        new TradingView.widget({
+            "autosize": true,
+            "symbol": "OANDA:XAUUSD",
+            "interval": "5",
+            "timezone": "Asia/Kuala_Lumpur",
+            "theme": "dark",
+            "style": "1",
+            "locale": "en",
+
+            "hide_top_toolbar": true,
+            "hide_side_toolbar": true,
+            "allow_symbol_change": false,
+            "save_image": false,
+
+            "studies": [
+                "RSI@tv-basicstudies",
+                "MASimple@tv-basicstudies"
+            ],
+
+            "container_id": "tradingview_chart"
+        });
+
+        window.tvLoaded = true;
+    }
+}
+
+function goBackMenu(){
+
+    document.getElementById("chartPage").style.display = "none";
+
+    document.getElementById("menuPage").style.display = "flex";
+}
+
+</script>
 
 </body>
 </html>
