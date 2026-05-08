@@ -344,7 +344,13 @@ if(localStorage.getItem("loggedIn") !== "true"){
       <div class="status-box">
 
   Balance :
-  <span id="balanceAmount">$12,540</span>
+  <div class="status-box">
+
+  Balance :
+
+  <span id="balanceAmount">
+    $12,540
+  </span>
 
   <span
     onclick="toggleBalance()"
@@ -646,8 +652,6 @@ function openFullscreenChart() {
 
 /* BALANCE TOGGLE */
 
-let balanceHidden = false;
-
 function toggleBalance(){
 
   const balance =
@@ -658,15 +662,15 @@ function toggleBalance(){
 
   if(balanceHidden){
 
-    balance.innerHTML = "$12,540";
-    eye.innerHTML = "👁️";
+    balance.textContent = "$12,540";
+    eye.textContent = "👁️";
 
     balanceHidden = false;
 
   }else{
 
-    balance.innerHTML = "••••••";
-    eye.innerHTML = "🙈";
+    balance.textContent = "••••••";
+    eye.textContent = "🙈";
 
     balanceHidden = true;
 
