@@ -15,13 +15,8 @@
 
 body{
     background:#0d0d0d;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
     color:white;
-    height:100vh;
-    overflow:hidden;
-}
-
-#menuPage{
     height:100vh;
     display:flex;
     justify-content:center;
@@ -49,94 +44,34 @@ p{
     padding:18px;
     background:#2962ff;
     color:white;
-    border:none;
+    text-decoration:none;
     border-radius:12px;
     font-size:20px;
-    cursor:pointer;
     transition:0.3s;
 }
 
 .button:hover{
     transform:scale(1.05);
 }
-
-#chartPage{
-    display:none;
-    width:100%;
-    height:100vh;
-    position:relative;
-}
-
-iframe{
-    width:100%;
-    height:100%;
-    border:none;
-}
-
-.backBtn{
-    position:absolute;
-    top:15px;
-    left:15px;
-    z-index:999;
-    background:#111;
-    border:1px solid #444;
-    width:auto;
-    padding:12px 20px;
-}
 </style>
 </head>
 
 <body>
 
-<!-- MENU PAGE -->
+<div class="container">
 
-<div id="menuPage">
+<h1>Second Wave App</h1>
 
-    <div class="container">
+<p>XAUUSD TradingView Access</p>
 
-        <h1>Second Wave App</h1>
+<a class="button"
+href="https://www.tradingview.com/chart/EnUI8WrU/?symbol=FX%3AXAUUSD">
 
-        <p>XAUUSD TradingView Access</p>
+Open TradingView
 
-        <button class="button" onclick="openChart()">
-            Open TradingView
-        </button>
-
-    </div>
+</a>
 
 </div>
-
-<!-- CHART PAGE -->
-
-<div id="chartPage">
-
-    <button class="button backBtn" onclick="goBackMenu()">
-        ⬅ Back Menu
-    </button>
-
-    <iframe
-    src="https://www.tradingview.com/chart/EnUI8WrU/?symbol=FX%3AXAUUSD">
-    </iframe>
-
-</div>
-
-<script>
-
-function openChart(){
-
-    document.getElementById("menuPage").style.display = "none";
-
-    document.getElementById("chartPage").style.display = "block";
-}
-
-function goBackMenu(){
-
-    document.getElementById("chartPage").style.display = "none";
-
-    document.getElementById("menuPage").style.display = "flex";
-}
-
-</script>
 
 </body>
 </html>
