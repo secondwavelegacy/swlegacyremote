@@ -399,8 +399,11 @@ gap:15px;
 
     <div class="status">
 
-      <div class="status-box disconnected">
-  ● MT5 DISCONNECTED
+      <div
+  class="status-box"
+  id="mt5Status"
+>
+  ● MT5 CONNECTED
 </div>
 
       <div class="status-box">
@@ -849,6 +852,40 @@ onValue(balanceRef, (snapshot)=>{
     document.getElementById(
       "balanceAmount"
     ).textContent = "$" + value;
+
+  }
+
+});
+
+    const statusRef =
+ref(db, "account/status");
+
+onValue(statusRef, (snapshot)=>{
+
+  const status = snapshot.val();
+
+  const box =
+  document.getElementById(
+    "mt5Status"
+  );
+
+  if(status === "CONNECTED"){
+
+    box.innerHTML =
+    "● MT5 CONNECTED";
+
+    box.classList.remove(
+      "disconnected"
+    );
+
+  }else{
+
+    box.innerHTML =
+    "● MT5 DISCONNECTED";
+
+    box.classList.add(
+      "disconnected"
+    );
 
   }
 
