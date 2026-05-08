@@ -769,15 +769,35 @@ document.getElementById("winrateValue");
 const tradesEl =
 document.getElementById("tradesValue");
 
-  const equityEl = document.getElementById("equityValue");
+ const equityEl = document.getElementById("equityValue");
+const equityBarEl = document.getElementById("equityBar");
+
 const dailyTargetEl = document.getElementById("dailyTargetValue");
+const dailyTargetBarEl = document.getElementById("dailyTargetBar");
 
 // REALTIME EQUITY
 const equityRef = ref(db, "account/equity");
 onValue(equityRef, (snapshot) => {
   const val = snapshot.val();
   if (val !== null) {
-    equityEl.textContent = "$" + val;
+    equityEl.textContent = "$" + val.toLocaleString();
+
+    // Update bar width (anggap max equity = 2000)
+    const percent = Math.min((val / 2000) * 100, 100);
+    equityBarEl.style.width = percent + "%";
+  }
+});
+
+// REALTIME DAILY TARGET
+const dailyTargetRef = ref(db, "account/dailyTarget");
+onValue(dailyTargetRef, (snapshot) => {
+  const val = snapshot.val();
+  if (val !== null) {
+    dailyTargetEl.textContent = val + "%";
+
+    // Update bar width (percent sama seperti nilai)
+    const percent = Math.min(val, 100); // dailyTarget memang % jadi langsung guna
+    dailyTargetBarEl.style.width = percent + "%";
   }
 });
 
