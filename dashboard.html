@@ -413,27 +413,16 @@ gap:15px;
 </div>
 
       <div class="status-box">
-
-        Balance :
-
-        <span id="balanceAmount">
-          $0
-        </span>
-
-       <span
-  onclick="toggleBalance()"
-  id="eyeIcon"
-  style="
-    cursor:pointer;
-    margin-left:8px;
-    user-select:none;
-  "
->
-  <i class="fa-solid fa-eye"></i>
-</span>
-        </span>
-
-      </div>
+  Balance :
+  <span id="balanceAmount">$0</span>
+  <span
+    onclick="toggleBalance()"
+    id="eyeIcon"
+    style="cursor:pointer; margin-left:8px; user-select:none;"
+  >
+    <i class="fa-solid fa-eye"></i>
+  </span>
+</div>
 
     </div>
 
@@ -821,45 +810,41 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-// HTML elements
-const balanceElem = document.getElementById("balanceAmount");
-const eyeElem = document.getElementById("eyeIcon");
+// Elements
+const balanceEl = document.getElementById("balanceAmount");
+const eyeEl = document.getElementById("eyeIcon");
 
-// Balance hidden state
+// State
 let balanceHidden = localStorage.getItem("balanceHidden") === "true";
-
-// Current balance
 let currentBalance = 0;
-
-// Listen for realtime updates
-const balanceRef = ref(db, "account/balance");
-onValue(balanceRef, (snapshot) => {
-  currentBalance = snapshot.val() || 0; // default 0 if null
-  updateBalanceUI();
-});
 
 // Update UI
 function updateBalanceUI() {
   if (balanceHidden) {
-    balanceElem.textContent = "••••••";
-    eyeElem.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+    balanceEl.textContent = "••••••";
+    eyeEl.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
   } else {
-    balanceElem.textContent = "$" + Number(currentBalance).toLocaleString();
-    eyeElem.innerHTML = '<i class="fa-solid fa-eye"></i>';
+    balanceEl.textContent = "$" + currentBalance;
+    eyeEl.innerHTML = '<i class="fa-solid fa-eye"></i>';
   }
 }
 
-// Toggle balance visibility
-function toggleBalance() {
+// Toggle function
+window.toggleBalance = function() {
   balanceHidden = !balanceHidden;
   localStorage.setItem("balanceHidden", balanceHidden);
   updateBalanceUI();
-}
+};
 
-// Expose to global for onclick
-window.toggleBalance = toggleBalance;
+// Listen to Realtime Database
+const balanceRef = ref(db, "account/balance");
+onValue(balanceRef, (snapshot) => {
+  const val = snapshot.val();
+  if (val !== null) currentBalance = val;
+  updateBalanceUI();
+});
 
-// Initial UI update
+// Initialize UI
 updateBalanceUI();
 </script>
 
