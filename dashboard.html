@@ -440,9 +440,9 @@ body::after{
 </div>
 
           <div class="mini-card">
-            <p class="small">Trades</p>
-            <h2>124</h2>
-          </div>
+  <p class="small">Trades</p>
+  <h2 id="tradesValue">124</h2>
+</div>
 
         </div>
 
@@ -786,6 +786,9 @@ document.getElementById("clientName");
 const winrateEl =
 document.getElementById("winrateValue");
 
+const tradesEl =
+document.getElementById("tradesValue");
+
 // STATE
 let balanceHidden =
 localStorage.getItem("balanceHidden") === "true";
@@ -916,6 +919,24 @@ onValue(winrateRef, (snapshot)=>{
 
     winrateEl.textContent =
     val + "%";
+
+  }
+
+});
+
+  // REALTIME TRADES
+const tradesRef =
+ref(db, "account/trades");
+
+onValue(tradesRef, (snapshot)=>{
+
+  const val =
+  snapshot.val();
+
+  if(val !== null){
+
+    tradesEl.textContent =
+    val;
 
   }
 
