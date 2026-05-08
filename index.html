@@ -1,241 +1,553 @@
-export default function SecondWaveDashboard() {
-  const positions = [
-    {
-      pair: 'XAUUSD',
-      type: 'BUY',
-      lot: '0.10',
-      profit: '+128.40',
-      rr: '1:2.5',
-    },
-    {
-      pair: 'GBPJPY',
-      type: 'SELL',
-      lot: '0.05',
-      profit: '+42.10',
-      rr: '1:1.8',
-    },
-  ]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SECOND WAVE AI</title>
 
-  return (
-    <div className="min-h-screen bg-black text-white overflow-hidden relative">
-      {/* Background Glow */}
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-yellow-500/10 blur-3xl rounded-full" />
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-orange-500/10 blur-3xl rounded-full" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-      {/* Header */}
-      <header className="relative z-10 flex items-center justify-between px-8 py-6 border-b border-white/10 backdrop-blur-xl bg-white/5">
-        <div>
-          <h1 className="text-3xl font-bold tracking-widest text-yellow-400">
-            SECOND WAVE
-          </h1>
-          <p className="text-sm text-white/50 mt-1">
-            Smart EA Control Dashboard
-          </p>
-        </div>
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
 
-        <div className="flex items-center gap-4">
-          <div className="bg-green-500/20 border border-green-500/40 px-4 py-2 rounded-full text-sm text-green-300">
-            MT5 CONNECTED
-          </div>
+    body{
+      background:#050505;
+      color:white;
+      overflow-x:hidden;
+    }
 
-          <div className="bg-white/10 border border-white/10 px-4 py-2 rounded-full text-sm">
-            Balance: $12,540
-          </div>
-        </div>
-      </header>
+    body::before{
+      content:'';
+      position:fixed;
+      width:500px;
+      height:500px;
+      background:rgba(255,174,0,0.12);
+      filter:blur(120px);
+      top:-100px;
+      left:-100px;
+      z-index:-1;
+    }
 
-      {/* Main Layout */}
-      <main className="relative z-10 grid grid-cols-1 lg:grid-cols-4 gap-6 p-6">
-        {/* Left Panel */}
-        <section className="lg:col-span-1 space-y-6">
-          {/* Profile Card */}
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl shadow-2xl">
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-black font-bold text-xl">
-                SW
-              </div>
+    body::after{
+      content:'';
+      position:fixed;
+      width:400px;
+      height:400px;
+      background:rgba(255,120,0,0.10);
+      filter:blur(120px);
+      bottom:-100px;
+      right:-100px;
+      z-index:-1;
+    }
 
-              <div>
-                <h2 className="font-semibold text-lg">Second Wave EA</h2>
-                <p className="text-white/50 text-sm">Realtime MT5 Control</p>
-              </div>
-            </div>
+    .container{
+      padding:20px;
+    }
 
-            <div className="mt-6 grid grid-cols-2 gap-4">
-              <div className="bg-black/30 rounded-2xl p-4 border border-white/5">
-                <p className="text-white/40 text-sm">Winrate</p>
-                <h3 className="text-2xl font-bold mt-1">87%</h3>
-              </div>
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px;
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.05);
+      backdrop-filter:blur(20px);
+      border-radius:25px;
+      margin-bottom:20px;
+    }
 
-              <div className="bg-black/30 rounded-2xl p-4 border border-white/5">
-                <p className="text-white/40 text-sm">Trades</p>
-                <h3 className="text-2xl font-bold mt-1">124</h3>
-              </div>
-            </div>
-          </div>
+    .logo h1{
+      color:#ffb300;
+      letter-spacing:3px;
+      font-size:30px;
+    }
 
-          {/* Quick Controls */}
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl shadow-2xl">
-            <h3 className="text-lg font-semibold mb-5">Quick Controls</h3>
+    .logo p{
+      color:rgba(255,255,255,0.45);
+      margin-top:5px;
+      font-size:13px;
+    }
 
-            <div className="space-y-4">
-              <button className="w-full bg-gradient-to-r from-red-500 to-orange-500 hover:scale-[1.02] transition-all rounded-2xl py-4 font-semibold shadow-lg">
-                CLOSE ALL TRADES
-              </button>
+    .status{
+      display:flex;
+      gap:15px;
+      flex-wrap:wrap;
+    }
 
-              <button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:scale-[1.02] transition-all rounded-2xl py-4 font-semibold shadow-lg">
-                MOVE TO BREAKEVEN
-              </button>
+    .status-box{
+      padding:12px 18px;
+      border-radius:16px;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      font-size:14px;
+    }
 
-              <button className="w-full bg-gradient-to-r from-yellow-400 to-amber-500 text-black hover:scale-[1.02] transition-all rounded-2xl py-4 font-semibold shadow-lg">
-                LOCK PROFIT
-              </button>
-            </div>
-          </div>
-        </section>
+    .connected{
+      color:#42ff8c;
+      border:1px solid rgba(66,255,140,0.3);
+      background:rgba(66,255,140,0.08);
+    }
 
-        {/* Center Panel */}
-        <section className="lg:col-span-2 space-y-6">
-          {/* Chart Placeholder */}
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-4 backdrop-blur-xl shadow-2xl">
-            <div className="flex items-center justify-between mb-4 px-2">
-              <div>
-                <h3 className="text-xl font-semibold">Live Market View</h3>
-                <p className="text-white/40 text-sm">TradingView / MT5 Stream</p>
-              </div>
+    .dashboard{
+      display:grid;
+      grid-template-columns:1fr 2fr 1fr;
+      gap:20px;
+    }
 
-              <div className="flex gap-2">
-                {['M5', 'M15', 'H1', 'H4'].map((tf) => (
-                  <button
-                    key={tf}
-                    className="px-4 py-2 rounded-xl bg-black/40 border border-white/10 hover:bg-yellow-400 hover:text-black transition-all text-sm"
-                  >
-                    {tf}
-                  </button>
-                ))}
-              </div>
-            </div>
+    .card{
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      backdrop-filter:blur(20px);
+      border-radius:28px;
+      padding:22px;
+      box-shadow:0 10px 40px rgba(0,0,0,0.3);
+    }
 
-            <div className="h-[500px] rounded-3xl bg-gradient-to-br from-black to-zinc-900 border border-white/10 flex items-center justify-center relative overflow-hidden">
-              <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_top,_rgba(255,215,0,0.25),transparent_50%)]" />
+    .title{
+      font-size:18px;
+      margin-bottom:18px;
+      font-weight:600;
+    }
 
-              <div className="text-center z-10">
-                <h2 className="text-4xl font-bold text-yellow-400 tracking-widest">
-                  SECOND WAVE
-                </h2>
-                <p className="text-white/40 mt-3">
-                  Live Chart Stream Area
-                </p>
-              </div>
-            </div>
-          </div>
+    .profile{
+      display:flex;
+      align-items:center;
+      gap:15px;
+      margin-bottom:25px;
+    }
 
-          {/* Active Trades */}
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl shadow-2xl">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-semibold">Active Positions</h3>
+    .avatar{
+      width:65px;
+      height:65px;
+      border-radius:20px;
+      background:linear-gradient(135deg,#ffb300,#ff6b00);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      color:black;
+      font-weight:700;
+      font-size:22px;
+    }
 
-              <div className="text-green-400 font-semibold">
-                Floating +$170.50
-              </div>
-            </div>
+    .small{
+      color:rgba(255,255,255,0.45);
+      font-size:13px;
+    }
 
-            <div className="space-y-4">
-              {positions.map((trade, idx) => (
-                <div
-                  key={idx}
-                  className="bg-black/30 border border-white/5 rounded-2xl p-5 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 hover:border-yellow-400/20 transition-all"
-                >
-                  <div className="flex items-center gap-5">
-                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center font-bold ${trade.type === 'BUY' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
-                      {trade.type}
-                    </div>
+    .stats{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:15px;
+    }
 
-                    <div>
-                      <h4 className="text-lg font-semibold">{trade.pair}</h4>
-                      <p className="text-white/40 text-sm">
-                        Lot {trade.lot} • RR {trade.rr}
-                      </p>
-                    </div>
-                  </div>
+    .mini-card{
+      background:rgba(0,0,0,0.25);
+      border-radius:18px;
+      padding:18px;
+    }
 
-                  <div className="flex items-center gap-3">
-                    <div className="text-green-400 font-bold text-lg">
-                      {trade.profit}
-                    </div>
+    .mini-card h2{
+      margin-top:8px;
+      font-size:24px;
+    }
 
-                    <button className="px-5 py-3 rounded-2xl bg-red-500/20 border border-red-500/30 text-red-300 hover:bg-red-500/30 transition-all">
-                      Close
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+    .control-btn{
+      width:100%;
+      border:none;
+      padding:16px;
+      border-radius:18px;
+      margin-bottom:14px;
+      font-weight:600;
+      color:white;
+      cursor:pointer;
+      transition:0.3s;
+      font-size:15px;
+    }
 
-        {/* Right Panel */}
-        <section className="lg:col-span-1 space-y-6">
-          {/* Account Stats */}
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl shadow-2xl">
-            <h3 className="text-lg font-semibold mb-5">Account Analytics</h3>
+    .control-btn:hover{
+      transform:translateY(-2px);
+    }
 
-            <div className="space-y-5">
-              <div>
-                <div className="flex justify-between mb-2 text-sm text-white/50">
-                  <span>Equity</span>
-                  <span>$13,240</span>
-                </div>
-                <div className="w-full h-3 bg-black/40 rounded-full overflow-hidden">
-                  <div className="w-[82%] h-full bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full" />
-                </div>
-              </div>
+    .red{
+      background:linear-gradient(135deg,#ff3c3c,#ff6b00);
+    }
 
-              <div>
-                <div className="flex justify-between mb-2 text-sm text-white/50">
-                  <span>Daily Target</span>
-                  <span>68%</span>
-                </div>
-                <div className="w-full h-3 bg-black/40 rounded-full overflow-hidden">
-                  <div className="w-[68%] h-full bg-gradient-to-r from-green-400 to-emerald-500 rounded-full" />
-                </div>
-              </div>
-            </div>
-          </div>
+    .blue{
+      background:linear-gradient(135deg,#2979ff,#00c6ff);
+    }
 
-          {/* Signal Feed */}
-          <div className="bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-xl shadow-2xl">
-            <div className="flex items-center justify-between mb-5">
-              <h3 className="text-lg font-semibold">Signal Feed</h3>
-              <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse" />
-            </div>
+    .gold{
+      background:linear-gradient(135deg,#ffcc00,#ff9800);
+      color:black;
+    }
 
-            <div className="space-y-4">
-              {[
-                'BUY XAUUSD confirmed',
-                'SL moved to breakeven',
-                'TP1 reached GBPJPY',
-                'Liquidity sweep detected',
-              ].map((item, idx) => (
-                <div
-                  key={idx}
-                  className="bg-black/30 border border-white/5 rounded-2xl p-4 text-sm text-white/70"
-                >
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
+    .chart{
+      height:520px;
+      border-radius:28px;
+      background:linear-gradient(135deg,#070707,#111);
+      border:1px solid rgba(255,255,255,0.08);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      position:relative;
+      overflow:hidden;
+    }
 
-          {/* Footer */}
-          <div className="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-3xl p-6 text-black shadow-2xl">
-            <h3 className="text-xl font-bold">SECOND WAVE AI</h3>
-            <p className="mt-2 text-black/70 text-sm leading-relaxed">
-              Premium institutional-grade remote trading control system for MetaTrader 5.
-            </p>
-          </div>
-        </section>
-      </main>
+    .chart::before{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at top, rgba(255,179,0,0.2), transparent 50%);
+    }
+
+    .chart-content{
+      text-align:center;
+      z-index:2;
+    }
+
+    .chart-content h1{
+      font-size:48px;
+      letter-spacing:5px;
+      color:#ffb300;
+    }
+
+    .chart-content p{
+      color:rgba(255,255,255,0.4);
+      margin-top:10px;
+    }
+
+    .trade{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:18px;
+      border-radius:20px;
+      background:rgba(0,0,0,0.25);
+      margin-bottom:15px;
+      border:1px solid rgba(255,255,255,0.05);
+    }
+
+    .trade-left{
+      display:flex;
+      align-items:center;
+      gap:15px;
+    }
+
+    .type{
+      width:55px;
+      height:55px;
+      border-radius:18px;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-weight:700;
+    }
+
+    .buy{
+      background:rgba(0,255,140,0.12);
+      color:#42ff8c;
+    }
+
+    .sell{
+      background:rgba(255,80,80,0.12);
+      color:#ff6767;
+    }
+
+    .profit{
+      color:#42ff8c;
+      font-weight:700;
+      margin-bottom:10px;
+    }
+
+    .close-btn{
+      border:none;
+      padding:12px 18px;
+      border-radius:14px;
+      background:rgba(255,80,80,0.15);
+      color:#ff7a7a;
+      cursor:pointer;
+    }
+
+    .feed{
+      padding:15px;
+      border-radius:18px;
+      background:rgba(0,0,0,0.25);
+      margin-bottom:12px;
+      color:rgba(255,255,255,0.75);
+      font-size:14px;
+    }
+
+    .footer-box{
+      background:linear-gradient(135deg,#ffcc00,#ff8f00);
+      color:black;
+    }
+
+    .footer-box p{
+      margin-top:10px;
+      color:rgba(0,0,0,0.7);
+      line-height:1.6;
+    }
+
+    @media(max-width:1100px){
+      .dashboard{
+        grid-template-columns:1fr;
+      }
+
+      .chart{
+        height:400px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="topbar">
+
+    <div class="logo">
+      <h1>SECOND WAVE</h1>
+      <p>Institutional EA Control Panel</p>
     </div>
-  )
-}
+
+    <div class="status">
+      <div class="status-box connected">
+        ● MT5 CONNECTED
+      </div>
+
+      <div class="status-box">
+        Balance : $12,540
+      </div>
+    </div>
+
+  </div>
+
+  <div class="dashboard">
+
+    <!-- LEFT PANEL -->
+    <div>
+
+      <div class="card">
+
+        <div class="profile">
+          <div class="avatar">SW</div>
+
+          <div>
+            <h2>Second Wave AI</h2>
+            <p class="small">Realtime MT5 Control</p>
+          </div>
+        </div>
+
+        <div class="stats">
+
+          <div class="mini-card">
+            <p class="small">Winrate</p>
+            <h2>87%</h2>
+          </div>
+
+          <div class="mini-card">
+            <p class="small">Trades</p>
+            <h2>124</h2>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="card" style="margin-top:20px;">
+
+        <div class="title">
+          Quick Controls
+        </div>
+
+        <button class="control-btn red">
+          CLOSE ALL TRADES
+        </button>
+
+        <button class="control-btn blue">
+          MOVE TO BREAKEVEN
+        </button>
+
+        <button class="control-btn gold">
+          LOCK PROFIT
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- CENTER -->
+    <div>
+
+      <div class="card">
+
+        <div class="title">
+          Live Market View
+        </div>
+
+        <div class="chart">
+
+          <div class="chart-content">
+            <h1>SECOND WAVE</h1>
+            <p>Trading Dashboard System</p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="card" style="margin-top:20px;">
+
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+          <div class="title" style="margin:0;">
+            Active Positions
+          </div>
+
+          <div class="profit">
+            Floating +$170.50
+          </div>
+        </div>
+
+        <div class="trade">
+
+          <div class="trade-left">
+
+            <div class="type buy">
+              BUY
+            </div>
+
+            <div>
+              <h3>XAUUSD</h3>
+              <p class="small">Lot 0.10 • RR 1:2.5</p>
+            </div>
+
+          </div>
+
+          <div>
+            <div class="profit">
+              +128.40
+            </div>
+
+            <button class="close-btn">
+              Close
+            </button>
+          </div>
+
+        </div>
+
+        <div class="trade">
+
+          <div class="trade-left">
+
+            <div class="type sell">
+              SELL
+            </div>
+
+            <div>
+              <h3>GBPJPY</h3>
+              <p class="small">Lot 0.05 • RR 1:1.8</p>
+            </div>
+
+          </div>
+
+          <div>
+            <div class="profit">
+              +42.10
+            </div>
+
+            <button class="close-btn">
+              Close
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div>
+
+      <div class="card">
+
+        <div class="title">
+          Account Analytics
+        </div>
+
+        <div style="margin-bottom:20px;">
+
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+            <span class="small">Equity</span>
+            <span>$13,240</span>
+          </div>
+
+          <div style="height:10px;background:#111;border-radius:20px;overflow:hidden;">
+            <div style="width:82%;height:100%;background:linear-gradient(90deg,#ffcc00,#ff9800);"></div>
+          </div>
+
+        </div>
+
+        <div>
+
+          <div style="display:flex;justify-content:space-between;margin-bottom:8px;">
+            <span class="small">Daily Target</span>
+            <span>68%</span>
+          </div>
+
+          <div style="height:10px;background:#111;border-radius:20px;overflow:hidden;">
+            <div style="width:68%;height:100%;background:linear-gradient(90deg,#00ff99,#00cc66);"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="card" style="margin-top:20px;">
+
+        <div class="title">
+          Signal Feed
+        </div>
+
+        <div class="feed">
+          BUY XAUUSD confirmed
+        </div>
+
+        <div class="feed">
+          SL moved to breakeven
+        </div>
+
+        <div class="feed">
+          TP1 reached GBPJPY
+        </div>
+
+        <div class="feed">
+          Liquidity sweep detected
+        </div>
+
+      </div>
+
+      <div class="card footer-box" style="margin-top:20px;">
+
+        <h2>SECOND WAVE AI</h2>
+
+        <p>
+          Premium institutional-grade remote trading control system for MetaTrader 5.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
