@@ -1,7 +1,62 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Dashboard</title>
+    <style>
+        /* === Reset dan gaya asas === */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e; /* Dark theme */
+            color: #fff;
+        }
+
+        /* === Flex center untuk button === */
+        body {
+            display: flex;
+            justify-content: center; /* center horizontal */
+            align-items: center;     /* center vertical */
+        }
+
+        /* === Button styling === */
+        #closeAllBtn {
+            padding: 20px 40px;
+            font-size: 22px;
+            font-weight: bold;
+            background-color: #ff4c4c;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s all;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        #closeAllBtn:hover {
+            background-color: #e03a3a;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
 <body>
+
     <button id="closeAllBtn">Close All</button>
 
     <script type="module">
-        // code Firebase / signal MT5
+        // Placeholder untuk nanti sambung ke MT5 / Firebase / WebSocket
+        const closeAllBtn = document.getElementById('closeAllBtn');
+
+        closeAllBtn.addEventListener('click', () => {
+            alert("Signal Close All dihantar!"); // Ganti dengan fungsi sebenar untuk MT5
+        });
     </script>
+
 </body>
+</html>
