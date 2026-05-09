@@ -3,44 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Close All Demo</title>
+    <title>Close All Center</title>
     <style>
         body {
             margin: 0;
-            padding: 20px;
+            padding: 0;
             font-family: Arial, sans-serif;
             background-color: #1e1e1e;
             color: #fff;
+            height: 100vh; /* Penuh tinggi viewport */
+            display: flex;
+            justify-content: center; /* center horizontal */
+            align-items: center;     /* center vertical */
         }
         button {
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 15px 30px;
+            font-size: 18px;
             cursor: pointer;
             background-color: #ff4c4c;
             border: none;
             color: #fff;
-            border-radius: 5px;
-        }
-        #container {
-            margin-top: 20px;
+            border-radius: 8px;
         }
     </style>
 </head>
 <body>
     <button id="closeAllBtn">Close All</button>
 
-    <div id="container">
-        <p>Elemen 1</p>
-        <p>Elemen 2</p>
-        <p>Elemen 3</p>
-    </div>
-
     <script>
         const closeAllBtn = document.getElementById('closeAllBtn');
-        const container = document.getElementById('container');
 
         closeAllBtn.addEventListener('click', () => {
-            container.innerHTML = ""; // Kosongkan semua elemen dalam container
+            alert("Semua elemen ditutup!"); // Contoh aksi, boleh ubah ikut fungsi sebenar
         });
     </script>
 </body>
